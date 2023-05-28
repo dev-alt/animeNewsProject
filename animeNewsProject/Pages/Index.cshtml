@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4">Collection Data</h2>
+    <p>Total Recipes: @Model.CollectionData.Count</p>
+
+    <!-- Search form -->
+    <form method="get" action="/">
+        <div class="form-group">
+            <input type="text" class="form-control" name="search" placeholder="Search recipes">
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+    </form>
+
+    <div class="row">
+        @foreach (var recipe in Model.SearchResults)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body bg-light">
+                        <h5 class="card-title text-primary">@recipe.Name</h5>
+                        <p class="card-text"><i class="far fa-clock"></i> Preparation Time: @recipe.PrepTimeInMinutes minutes</p>
+                        <p class="card-text"><i class="fas fa-utensils"></i> Ingredients: @string.Join(", ", recipe.Ingredients)</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <a href="?page=@i" class="@(Model.CurrentPage == i ? "active" : "")">@i</a>
+        }
+    </div>
+</div>
