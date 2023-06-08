@@ -6,6 +6,7 @@ namespace animeNewsProject.Pages
 {
     public class AddArticleModel : PageModel
     {
+
         private readonly MongoDbService _mongoDbService;
 
         public AddArticleModel(MongoDbService mongoDbService)
@@ -18,6 +19,7 @@ namespace animeNewsProject.Pages
 
         [BindProperty]
         public Entry Article { get; set; }
+
 
         public IActionResult OnPost()
         {
@@ -51,7 +53,5 @@ namespace animeNewsProject.Pages
                 return Page();
             }
         }
-
-
     }
 }

@@ -23,7 +23,6 @@ namespace animeNewsProject.Pages
         [BsonElement("date_published")]
         public DateTime? DatePublished { get; set; }
 
-
         [BsonElement("rating")]
         public double Rating { get; set; }
 
@@ -38,7 +37,5 @@ namespace animeNewsProject.Pages
 
         [BsonElement("views")]
         public int Views { get; set; }
-
-
     }
 }

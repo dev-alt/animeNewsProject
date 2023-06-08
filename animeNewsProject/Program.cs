@@ -14,23 +14,29 @@ namespace animeNewsProject
             // Create a new web application builder
             var builder = WebApplication.CreateBuilder(args);
 
-
+            // Configure services and register dependencies
 
             builder.Services.AddSingleton<MongoDbService>(provider =>
             {
                 // Set up the MongoDB connection string
                 var connectionString = "mongodb+srv://9957173:mongodb@cluster0.3xvibw0.mongodb.net/?retryWrites=true&w=majority";
-                return new MongoDbService(connectionString);
+                var client = new MongoClient(connectionString);
+                var databaseName = "anime_news_project"; // Specify your database name
+                return new MongoDbService(client, databaseName);
             });
 
-            // Add support for Razor Pages
 
-            // Add services to the container.
+
+
+
             builder.Services.AddRazorPages();
 
             // Build the application
             var app = builder.Build();
 
+            // Configure the application
+
+            // If the application is not running in a development environment, configure error handling and enable HTTPS
             if (!app.Environment.IsDevelopment())
             // Redirect HTTP requests to HTTPS
             {
@@ -40,18 +46,25 @@ namespace animeNewsProject
             // Enable routing
             }
 
-
-
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
+            // Serve static files (e.g., CSS, JavaScript, images) from wwwroot folder
+            app.UseStaticFiles();
             app.UseRouting();
 
-                app.Run();
+            app.UseAuthorization();
+
+            app.MapRazorPages();
+
+
+            app.MapGet("/{page?}", async (HttpContext context) =>
+            {
+                var page = context.Request.RouteValues["page"]?.ToString() ?? "1";
+                await context.Response.WriteAsync($"Page: {page}");
+            });
+
 
                 app.Run();
-
-            app.Run();
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿@page
-@model animeNewsProject.Pages.AddArticleModel
-@{
-
-}
-
-<form method="post">
+﻿<form method="post">
     <!-- Title -->
     <div class="mb-3">
         <label for="title" class="form-label">Title:</label>
@@ -29,16 +23,19 @@
         <input type="number" id="rating" name="rating" step="0.1" class="form-control" required>
     </div>
 
+    <!-- author_id -->
     <div class="mb-3">
         <label for="author_id" class="form-label">Author ID:</label>
         <input type="number" id="author_id" name="authorId" class="form-control">
     </div>
 
+    <!-- source_id -->
     <div class="mb-3">
         <label for="source_id" class="form-label">Source ID:</label>
         <input type="number" id="source_id" name="sourceId" class="form-control">
     </div>
     
+
     <div class="mb-3">
         <label for="category" class="form-label">Category:</label>
         <input type="text" id="category" name="category" class="form-control" required>
