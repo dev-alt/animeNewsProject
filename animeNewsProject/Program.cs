@@ -20,15 +20,18 @@ namespace animeNewsProject
             {
                 // Set up the MongoDB connection string
                 var connectionString = "mongodb+srv://9957173:mongodb@cluster0.3xvibw0.mongodb.net/?retryWrites=true&w=majority";
+
+                // Create a new MongoDB client with the connection string
                 var client = new MongoClient(connectionString);
-                var databaseName = "anime_news_project"; // Specify your database name
+
+                // Specify the database name
+                var databaseName = "anime_news_project";
+
+                // Create and return an instance of the MongoDbService, providing the client and database name
                 return new MongoDbService(client, databaseName);
             });
 
-
-
-
-
+            // Add support for Razor Pages
             builder.Services.AddRazorPages();
 
             // Build the application
@@ -38,33 +41,38 @@ namespace animeNewsProject
 
             // If the application is not running in a development environment, configure error handling and enable HTTPS
             if (!app.Environment.IsDevelopment())
-            // Redirect HTTP requests to HTTPS
             {
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
-
-            // Enable routing
             }
 
+            // Redirect HTTP requests to HTTPS
             app.UseHttpsRedirection();
 
             // Serve static files (e.g., CSS, JavaScript, images) from wwwroot folder
             app.UseStaticFiles();
+
+            // Enable routing
             app.UseRouting();
 
+            // Enable authorization
             app.UseAuthorization();
 
+            // Map Razor Pages
             app.MapRazorPages();
 
-
+            // Define a route for handling HTTP GET requests with a page parameter
             app.MapGet("/{page?}", async (HttpContext context) =>
             {
+                // Extract the page parameter from the route values, defaulting to "1" if not provided
                 var page = context.Request.RouteValues["page"]?.ToString() ?? "1";
+
+                // Send a response with the page number
                 await context.Response.WriteAsync($"Page: {page}");
             });
 
-
-                app.Run();
+            // Start the application
+            app.Run();
         }
     }
 }
