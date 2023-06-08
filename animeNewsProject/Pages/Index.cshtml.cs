@@ -36,23 +36,23 @@ namespace animeNewsProject.Pages
             CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
         }
 
-        public IActionResult OnPostDelete(string id)
-        {
-            try
-            {
-                var collectionName = "articles";
-                _mongoDbService.DeleteEntry<AnimeArticle>(collectionName, id);
+        //public IActionResult OnPostDelete(string id)
+        //{
+        //    try
+        //    {
+        //        var collectionName = "articles";
+        //        _mongoDbService.DeleteEntry<AnimeArticle>(collectionName, id);
 
-                // Redirect to the Articles page after successful deletion
-                return RedirectToPage("/Index");
-            }
-            catch
-            {
-                // Handle the exception (e.g., log or display an error message)
-                ModelState.AddModelError(string.Empty, "Error occurred while deleting the article.");
-                return Page();
-            }
-        }
+        //        // Redirect to the Articles page after successful deletion
+        //        return RedirectToPage("/Index");
+        //    }
+        //    catch
+        //    {
+        //        // Handle the exception (e.g., log or display an error message)
+        //        ModelState.AddModelError(string.Empty, "Error occurred while deleting the article.");
+        //        return Page();
+        //    }
+        //}
 
         public void OnGet()
         {
