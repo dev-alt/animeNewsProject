@@ -6,39 +6,75 @@ namespace animeNewsProject
     {
         public static void Main(string[] args)
         {
+            // Create a new web application builder
             var builder = WebApplication.CreateBuilder(args);
+
+
+
             builder.Services.AddSingleton<MongoDbService>(provider =>
             {
+                // Set up the MongoDB connection string
                 var connectionString = "mongodb+srv://9957173:mongodb@cluster0.3xvibw0.mongodb.net/?retryWrites=true&w=majority";
-                return new MongoDbService(connectionString);
+
+                // Create a new MongoDB client with the connection string
+                var client = new MongoClient(connectionString);
+
+                // Specify the database name
+                var databaseName = "anime_news_project";
+
+                // Create and return an instance of the MongoDbService, providing the client and database name
+                return new MongoDbService(client, databaseName);
             });
 
+            // Add support for Razor Pages
 
-            // Add services to the container.
+
+
+
+
+            // Configure the application
+
+            // If the application is not running in a development environment, configure error handling and enable HTTPS
+
             builder.Services.AddRazorPages();
 
+            // Build the application
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
+            // Redirect HTTP requests to HTTPS
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+
+            // Enable routing
             }
 
-
-
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
+            // Serve static files (e.g., CSS, JavaScript, images) from wwwroot folder
+            app.UseStaticFiles();
             app.UseRouting();
 
-            app.UseAuthorization();
+            // Define a route for handling HTTP GET requests with a page parameter
+            app.MapGet("/{page?}", async (HttpContext context) =>
+            {
+                // Extract the page parameter from the route values, defaulting to "1" if not provided
+                var page = context.Request.RouteValues["page"]?.ToString() ?? "1";
 
-            app.MapRazorPages();
+                // Send a response with the page number
+                await context.Response.WriteAsync($"Page: {page}");
+            });
 
+            // Start the application
             app.Run();
+
+                app.Run();
+
+                app.Run();
+
+                app.Run();
         }
     }
 }

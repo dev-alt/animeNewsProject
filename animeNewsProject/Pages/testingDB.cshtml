@@ -1,0 +1,23 @@
+﻿@page
+@model animeNewsProject.Pages.TestingDbModel
+
+@if (Model.IsMongoDbConnected)
+{
+    <p>Successfully connected to MongoDB:</p>
+}
+
+<h1>Database Names!!</h1>
+@if (Model.DatabaseNames.Count > 0)
+{
+    <p>Database Names:</p>
+    <ul>
+        @foreach (var dbName in Model.DatabaseNames)
+        {
+            <li>@dbName</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No database names found.</p>
+}
