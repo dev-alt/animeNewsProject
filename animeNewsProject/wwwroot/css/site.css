@@ -2,10 +2,18 @@ html {
   font-size: 14px;
 }
 
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
+}
+
+@font-face {
+    font-family: 'Orbitron';
+    src: url('../fonts/orbitron.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -18,5 +26,6 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: 'Orbitron', Arial, sans-serif;
 }
