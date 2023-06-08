@@ -1,9 +1,9 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace animeNewsProject.Pages
 {
-    public class AnimeArticle
+    public class Entry
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -22,22 +22,21 @@ namespace animeNewsProject.Pages
         [BsonElement("date_published")]
         public DateTime? DatePublished { get; set; }
 
-
         [BsonElement("rating")]
         public double Rating { get; set; }
 
         [BsonElement("author_id")]
-        public int? AuthorId { get; set; }
+        [BsonRepresentation(BsonType.Int32)] // Specify the representation as Int32
+        public int AuthorId { get; set; }
 
         [BsonElement("source_id")]
-        public int? SourceId { get; set; }
+        [BsonRepresentation(BsonType.Int32)] // Specify the representation as Int32
+        public int SourceId { get; set; }
 
         [BsonElement("category")]
         public string? Category { get; set; }
 
         [BsonElement("views")]
         public int Views { get; set; }
-
-
     }
 }
