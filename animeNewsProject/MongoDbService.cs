@@ -23,7 +23,7 @@ namespace animeNewsProject
         // Add methods for your specific database operations
 
         // Example method: Get all documents from a collection
-        public List<T> GetAllDocuments<T>(string collectionName)
+        public List<T> GetAllDocuments<T>(string articles)
         {
             var collection = _database.GetCollection<T>(articles);
 
