@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 
 namespace animeNewsProject
@@ -7,38 +12,42 @@ namespace animeNewsProject
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             builder.Services.AddSingleton<MongoDbService>(provider =>
             {
                 var connectionString = "mongodb+srv://9957173:mongodb@cluster0.3xvibw0.mongodb.net/?retryWrites=true&w=majority";
-                return new MongoDbService(connectionString);
+                var client = new MongoClient(connectionString);
+                var databaseName = "anime_news_project"; // Specify your database name
+                return new MongoDbService(client, databaseName);
             });
 
-
-            // Add services to the container.
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.MapRazorPages();
 
-            app.Run();
+
+            app.MapGet("/{page?}", async (HttpContext context) =>
+            {
+                var page = context.Request.RouteValues["page"]?.ToString() ?? "1";
+                await context.Response.WriteAsync($"Page: {page}");
+            });
+
+
+                app.Run();
         }
     }
 }
