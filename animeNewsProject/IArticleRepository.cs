@@ -6,7 +6,9 @@ namespace animeNewsProject
     public interface IArticleRepository
     {
         Task<AnimeArticle> GetArticleByIdAsync(string id);
-        // Add additional methods to implement if needed
+        Task DeleteArticleByIdAsync(string id);
+        Task UpdateArticleAsync(AnimeArticle article);
+
     }
 
 

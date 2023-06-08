@@ -66,14 +66,16 @@ namespace animeNewsProject
             app.MapRazorPages();
 
             // Define a route for handling HTTP GET requests with a page parameter
-            app.MapGet("/{page?}", async (HttpContext context) =>
-            {
-                // Extract the page parameter from the route values, defaulting to "1" if not provided
-                var page = context.Request.RouteValues["page"]?.ToString() ?? "1";
+            //app.MapGet("/{page?}", async (HttpContext context) =>
+            //{
+            //    // Extract the page parameter from the route values, defaulting to "1" if not provided
+            //    var page = context.Request.RouteValues["page"]?.ToString() ?? "1";
 
-                // Send a response with the page number
-                await context.Response.WriteAsync($"Page: {page}");
-            });
+            //    // Send a response with the page number
+            //    await context.Response.WriteAsync($"Page: {page}");
+            //});
+     
+
 
             // Start the application
             app.Run();

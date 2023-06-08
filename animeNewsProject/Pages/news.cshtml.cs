@@ -10,6 +10,9 @@ namespace animeNewsProject.Pages
 
         private readonly IArticleRepository _yourArticleRepository;
 
+        [BindProperty]
+        public AnimeArticle UpdatedArticle { get; set; }
+
         public NewsModel(IArticleRepository yourArticleRepository)
         {
             _yourArticleRepository = yourArticleRepository;
@@ -25,6 +28,16 @@ namespace animeNewsProject.Pages
             }
 
             return Page();
+        }
+        public IActionResult OnGetEdit(string id)
+        {
+            return RedirectToPage("/Edit", new { id });
+        }
+
+        public async Task<IActionResult> OnPostDeleteAsync(string id)
+        {
+            await _yourArticleRepository.DeleteArticleByIdAsync(id);
+            return RedirectToPage("/Index");
         }
     }
 }
