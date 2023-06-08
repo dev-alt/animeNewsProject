@@ -1,0 +1,12 @@
+﻿@page
+@model animeNewsProject.Pages.NewsModel
+@{
+    ViewData["Title"] = "Article Details";
+}
+
+<h1>@Model.Article.Title</h1>
+<p>Category: @Model.Article.Category</p>
+<p>Date Published: @Model.Article.DatePublished</p>
+<p>Rating: @Model.Article.Rating</p>
+<p>Views: @Model.Article.Views</p>
+<p>Text: @Model.Article.Text</p>

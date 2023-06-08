@@ -30,6 +30,10 @@ namespace animeNewsProject
                 // Create and return an instance of the MongoDbService, providing the client and database name
                 return new MongoDbService(client, databaseName);
             });
+            
+            // Add scoped services
+            builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+
 
             // Add support for Razor Pages
             builder.Services.AddRazorPages();
