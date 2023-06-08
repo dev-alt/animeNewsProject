@@ -32,9 +32,15 @@
                         <p class="card-text">Category: @article.Category</p>
                         <p class="card-text">Views: @article.Views</p>
                     </div>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@article.DocumentId">
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         }
+
     </div>
 
     <!-- Pagination -->

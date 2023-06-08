@@ -13,6 +13,8 @@ namespace animeNewsProject
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+
             builder.Services.AddSingleton<MongoDbService>(provider =>
             {
                 var connectionString = "mongodb+srv://9957173:mongodb@cluster0.3xvibw0.mongodb.net/?retryWrites=true&w=majority";
@@ -20,6 +22,10 @@ namespace animeNewsProject
                 var databaseName = "anime_news_project"; // Specify your database name
                 return new MongoDbService(client, databaseName);
             });
+
+
+
+
 
             builder.Services.AddRazorPages();
 
