@@ -1,12 +1,23 @@
 ﻿@page
 @model animeNewsProject.Pages.NewsModel
-@{
-    ViewData["Title"] = "Article Details";
-}
 
-<h1>@Model.Article.Title</h1>
-<p>Category: @Model.Article.Category</p>
-<p>Date Published: @Model.Article.DatePublished</p>
-<p>Rating: @Model.Article.Rating</p>
-<p>Views: @Model.Article.Views</p>
-<p>Text: @Model.Article.Text</p>
+<h1>Article Details</h1>
+
+<div>
+    <h2>@Model.Article.Title</h2>
+    <p>Category: @Model.Article.Category</p>
+    <p>Date Published: @Model.Article.DatePublished</p>
+    <p>Rating: @Model.Article.Rating</p>
+    <p>Views: @Model.Article.Views</p>
+    <p>@Model.Article.Text</p>
+</div>
+
+<div>
+    <a href="~/edit?id=@Model.Article.DocumentId" class="btn btn-primary">Edit</a>
+
+
+
+    <form method="post" action="~/news/delete/@Model.Article.DocumentId">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+</div>

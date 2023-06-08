@@ -40,6 +40,11 @@ namespace animeNewsProject
             }
         }
 
+        public IMongoCollection<T> GetCollection<T>(string collectionName)
+        {
+            return _database.GetCollection<T>(collectionName);
+        }
+
         public void AddEntry<T>(string articles, T entry)
         {
             var collection = _database.GetCollection<T>(articles);
@@ -55,6 +60,7 @@ namespace animeNewsProject
                 Console.WriteLine($"Exception stack trace: {ex.StackTrace}");
             }
         }
+
 
         internal void DeleteEntry<T>(string collectionName, string id)
         {

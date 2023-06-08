@@ -1,0 +1,50 @@
+﻿@page
+@model animeNewsProject.Pages.EditModel
+
+<h1>Edit Article</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="UpdatedArticle.DocumentId" />
+
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" asp-for="UpdatedArticle.Title" />
+    </div>
+
+    <div class="form-group">
+        <label>Text</label>
+        <textarea class="form-control" asp-for="UpdatedArticle.Text"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Date Published</label>
+        <input type="date" class="form-control" asp-for="UpdatedArticle.DatePublished" />
+    </div>
+
+    <div class="form-group">
+        <label>Rating</label>
+        <input type="number" class="form-control" asp-for="UpdatedArticle.Rating" />
+    </div>
+
+    <div class="form-group">
+        <label>Author ID</label>
+        <input type="number" class="form-control" asp-for="UpdatedArticle.AuthorId" />
+    </div>
+
+    <div class="form-group">
+        <label>Source ID</label>
+        <input type="number" class="form-control" asp-for="UpdatedArticle.SourceId" />
+    </div>
+
+    <div class="form-group">
+        <label>Category</label>
+        <input type="text" class="form-control" asp-for="UpdatedArticle.Category" />
+    </div>
+
+    <div class="form-group">
+        <label>Views</label>
+        <input type="number" class="form-control" asp-for="UpdatedArticle.Views" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
