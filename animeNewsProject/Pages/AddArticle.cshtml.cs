@@ -6,7 +6,6 @@ namespace animeNewsProject.Pages
 {
     public class AddArticleModel : PageModel
     {
-        // MongoDB service for database operations
         private readonly MongoDbService _mongoDbService;
 
         public AddArticleModel(MongoDbService mongoDbService)
@@ -20,7 +19,6 @@ namespace animeNewsProject.Pages
         [BindProperty]
         public Entry Article { get; set; }
 
-        // Handler for the HTTP POST request
         public IActionResult OnPost()
         {
             // Check if the form data is valid
@@ -53,5 +51,7 @@ namespace animeNewsProject.Pages
                 return Page();
             }
         }
+
+
     }
 }

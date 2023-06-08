@@ -1,53 +1,103 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace animeNewsProject.Pages
 {
     public class IndexModel : PageModel
     {
-
         [BindProperty(SupportsGet = true)]
-        public string Search { get; set; }
-        public List<Recipe> SearchResults { get; set; }
+        public string? Search { get; set; }
+
+        public List<AnimeArticle>? SearchResults { get; set; }
 
         // Pagination properties
         [BindProperty(SupportsGet = true)]
         public int CurrentPage { get; set; } = 1;
-        public int RecipesPerPage { get; set; } = 6; // Adjust the number of recipes per page
-        public int TotalPages { get; set; }
 
+        public int ArticlesPerPage { get; set; } = 6; // Adjust the number of articles per page
+
+        public int TotalPages { get; set; }
 
         private readonly ILogger<IndexModel> _logger;
         private readonly MongoDbService _mongoDbService;
-        public List<Recipe> CollectionData { get; private set; }
+
+        public List<AnimeArticle> CollectionData { get; private set; }
+
         public IndexModel(ILogger<IndexModel> logger, MongoDbService mongoDbService)
         {
             _logger = logger;
             _mongoDbService = mongoDbService;
+
+            CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
+        }
+
+        public IActionResult OnPostDelete(string id)
+        {
+            try
+            {
+                var collectionName = "articles";
+                _mongoDbService.DeleteEntry<AnimeArticle>(collectionName, id);
+
+                // Redirect to the Articles page after successful deletion
+                return RedirectToPage("/Index");
+            }
+            catch
+            {
+                // Handle the exception (e.g., log or display an error message)
+                ModelState.AddModelError(string.Empty, "Error occurred while deleting the article.");
+                return Page();
+            }
         }
 
         public void OnGet()
         {
-            CollectionData = _mongoDbService.GetAllDocuments<Recipe>("recipes");
-
-            if (!string.IsNullOrEmpty(Search))
+            try
             {
-                SearchResults = CollectionData
-                    .Where(r => r.Name.Contains(Search, StringComparison.OrdinalIgnoreCase))
+                CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
+
+                if (!string.IsNullOrEmpty(Search))
+                {
+                    // Filter articles based on search query
+                    SearchResults = CollectionData
+                        .Where(r => r.Title != null && r.Title.Contains(Search, StringComparison.OrdinalIgnoreCase))
+                        .ToList();
+                }
+                else
+                {
+                    // No search query, show all articles
+                    SearchResults = CollectionData;
+                }
+
+                // Apply pagination
+                TotalPages = (int)Math.Ceiling(SearchResults.Count / (double)ArticlesPerPage);
+
+                if (CurrentPage < 1)
+                {
+                    CurrentPage = 1;
+                }
+                else if (CurrentPage > TotalPages)
+                {
+                    CurrentPage = TotalPages;
+                }
+
+                int startIndex = (CurrentPage - 1) * ArticlesPerPage;
+                int endIndex = Math.Min(startIndex + ArticlesPerPage, SearchResults.Count);
+
+                SearchResults = SearchResults
+                    .Skip(startIndex)
+                    .Take(endIndex - startIndex)
                     .ToList();
             }
-            else
+            catch (Exception ex)
             {
-                SearchResults = CollectionData;
+                _logger.LogError(ex, "An error occurred while processing the request.");
+                // Handle the error (e.g., show an error message to the user)
             }
-
-            // Apply pagination
-            TotalPages = (int)Math.Ceiling(SearchResults.Count / (double)RecipesPerPage);
-            SearchResults = SearchResults
-                .Skip((CurrentPage - 1) * RecipesPerPage)
-                .Take(RecipesPerPage)
-                .ToList();
         }
-
     }
 }

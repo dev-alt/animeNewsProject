@@ -1,0 +1,86 @@
+Folder PATH listing
+Volume serial number is 18B8-7650
+C:.
++---animeNewsProject
+    +---bin
+    ¦   +---Debug
+    ¦   ¦   +---net7.0
+    ¦   ¦       +---runtimes
+    ¦   ¦           +---linux
+    ¦   ¦           ¦   +---native
+    ¦   ¦           +---osx
+    ¦   ¦           ¦   +---native
+    ¦   ¦           +---win
+    ¦   ¦               +---native
+    ¦   +---Release
+    ¦       +---net7.0
+    ¦           +---runtimes
+    ¦               +---linux
+    ¦               ¦   +---native
+    ¦               +---osx
+    ¦               ¦   +---native
+    ¦               +---win
+    ¦                   +---native
+    +---Images
+    +---obj
+    ¦   +---Debug
+    ¦   ¦   +---net7.0
+    ¦   ¦       +---ref
+    ¦   ¦       +---refint
+    ¦   ¦       +---scopedcss
+    ¦   ¦       ¦   +---bundle
+    ¦   ¦       ¦   +---Pages
+    ¦   ¦       ¦   ¦   +---Shared
+    ¦   ¦       ¦   +---projectbundle
+    ¦   ¦       +---staticwebassets
+    ¦   +---Release
+    ¦       +---net7.0
+    ¦           +---PubTmp
+    ¦           ¦   +---Out
+    ¦           ¦       +---runtimes
+    ¦           ¦       ¦   +---linux
+    ¦           ¦       ¦   ¦   +---native
+    ¦           ¦       ¦   +---osx
+    ¦           ¦       ¦   ¦   +---native
+    ¦           ¦       ¦   +---win
+    ¦           ¦       ¦       +---native
+    ¦           ¦       +---wwwroot
+    ¦           ¦           +---css
+    ¦           ¦           +---js
+    ¦           ¦           +---lib
+    ¦           ¦               +---bootstrap
+    ¦           ¦               ¦   +---dist
+    ¦           ¦               ¦       +---css
+    ¦           ¦               ¦       +---js
+    ¦           ¦               +---jquery
+    ¦           ¦               ¦   +---dist
+    ¦           ¦               +---jquery-validation
+    ¦           ¦               ¦   +---dist
+    ¦           ¦               +---jquery-validation-unobtrusive
+    ¦           +---ref
+    ¦           +---refint
+    ¦           +---scopedcss
+    ¦           ¦   +---bundle
+    ¦           ¦   +---Pages
+    ¦           ¦   ¦   +---Shared
+    ¦           ¦   +---projectbundle
+    ¦           +---staticwebassets
+    +---Pages
+    ¦   +---Shared
+    +---Properties
+    ¦   +---PublishProfiles
+    ¦   +---ServiceDependencies
+    ¦       +---animeNewsProject - Web Deploy
+    +---wwwroot
+        +---css
+        +---js
+        +---lib
+            +---bootstrap
+            ¦   +---dist
+            ¦       +---css
+            ¦       +---js
+            +---jquery
+            ¦   +---dist
+            +---jquery-validation
+            ¦   +---dist
+            +---jquery-validation-unobtrusive

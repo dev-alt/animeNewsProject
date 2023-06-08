@@ -6,6 +6,7 @@ namespace animeNewsProject.Pages
     public class TestingDbModel : PageModel
     {
         private readonly MongoDbService _mongoDbService;
+
         public bool IsMongoDbConnected { get; private set; }
         public string MongoDbConnectionString { get; private set; }
         public List<string> DatabaseNames { get; set; }
@@ -37,6 +38,9 @@ namespace animeNewsProject.Pages
             var formattedConnectionString = connectionString.Replace(";", "; ");
             return formattedConnectionString;
         }
+
+
+
 
         private List<string> GetDatabaseNames()
         {
