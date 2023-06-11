@@ -23,8 +23,13 @@ namespace animeNewsProject.Pages
             }
         }
 
-        private bool IsValidUser(string username, string password)
+         private static bool IsValidUser(string username, string password)
         {
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                return false;
+            }
             // Implement your authentication logic here
             // Check the credentials against your MongoDB or any other authentication mechanism
             // Return true if the user is valid, otherwise return false

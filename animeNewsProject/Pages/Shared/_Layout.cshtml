@@ -1,177 +1,175 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - animeNewsProject</title>
+﻿    @using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
+    <!DOCTYPE html>
+    <html lang="en">
 
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - animeNewsProject</title>
+@*        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+        <!-- Include custom CSS files -->
+        <link rel="stylesheet" href="css/hidden.css" />
+        <link rel="stylesheet" href="css/footer.css"/>
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    </head>
 
-    <!-- Include custom CSS files -->
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <body>
+        <a href="#main-content" class="visually-hidden focusable skip-link">
+            Skip to main content
+        </a>
 
-    <!-- Include Font Awesome CSS -->
-    <link rel="stylesheet" href="css/fontawesome.css" />
+        <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
 
-    <!-- Include your additional CSS files -->
-    <link rel="stylesheet" type="text/css" href="~/css/plugins.css">
-    <link rel="stylesheet" type="text/css" href="~/css/settings.css">
-    <link rel="stylesheet" type="text/css" href="~/css/layers.css">
-    <link rel="stylesheet" type="text/css" href="~/css/navigation.css">
-    <link rel="stylesheet" type="text/css" href="~/css/revolution.addon.filmstrip.css">
-    <link rel="stylesheet" type="text/css" href="~/css/typewriter.css">
-    <link rel="stylesheet" type="text/css" href="~/css/icons.css">
-@*    <link rel="stylesheet" type="text/css" href="~/css/style.css">*@
-    <link rel="stylesheet" type="text/css" href="~/css/blue.css">
+            <h1 class="page-title visually-hidden">Anime News Database</h1>
 
-    <!-- Include Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i" rel="stylesheet" type="text/css">
-</head>
-<body>
-    <div class="content-wrapper">
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="layout-container front-page">
+                <!-- Include the header file -->
+                <div class="top-bar expanded">
+                    <header id="navbar" role="banner">
+                        <div class="max-width-container">
+                            <div class="header-logo">
+                                <div class="region region-header-logo">
+                                    <div id="block-gi5-branding" class="block block-system block-system-branding-block">
+                                        <a href="/" rel="home" class="site-logo">
+                                            <img src="/images/andb-banner.svg" alt="Home" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="header-left-container">
+                                <div class="header-social-links">
+                                    <div class="header-icon">
+                                        <a href="#" target="_blank" class="social-icon twitter">Twitter</a>
+                                    </div>
+                                    <div class="header-icon">
+                                        <a href="#" target="_blank" class="social-icon facebook">Facebook</a>
+                                    </div>
+                                    <div class="header-icon">
+                                        <a href="#" target="_blank" class="social-icon instagram">Instagram</a>
+                                    </div>
+                                    <div class="header-icon">
+                                        <a href="#" target="_blank" class="social-icon twitch">Twitch</a>
+                                    </div>
+                                    <div class="header-icon">
+                                        <a href="#" target="_blank" class="social-icon youtube">YouTube</a>
+                                    </div>
+                                    <div class="header-icon">
+                                        <a href="#" target="_blank" class="social-icon tiktok">TikTok</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="header-nav">
+                                <div class="region region-header-nav">
+                                    <nav role="navigation" aria-labelledby="block-gi5-main-menu-menu"
+                                         id="block-gi5-main-menu" class="block block-menu navigation menu--main">
+                                        <h2 class="visually-hidden" id="block-gi5-main-menu-menu">Main navigation</h2>
+                                        <ul class="menu">
+
+                                            <li class="menu-item">
+                                                <a class="nav-link" asp-page="/news">NEWS</a>
+                                            </li>
+
+                                            <li class="menu-item">
+                                                <a class="nav-link" asp-page="/previews">PREVIEWS</a>
+                                            </li>
+
+                                            <li class="menu-item">
+                                                <a class="nav-link" asp-page="/reviews">REVIEWS</a>
+                                            </li>
+
+                                            <li class="menu-item">
+                                                <a class="nav-link" asp-page="/podcasts">PODCASTS</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a class="nav-link" asp-page="/features">FEATURES</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a class="nav-link" asp-page="/videos">VIDEOS</a>
+                                            </li>
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="header-right-container">
+                                <div class="header-icon search-button">
+                                    <div class="icon-search"></div>
+                                </div>
+                                <div class="header-icon user-button">
+                                    <div class="user-menu user-header">
+                                        <div class="user-icon icon-missing"></div>
+                                    </div>
+                                </div>
+                                <div class="header-icon expanded-menu-button">
+                                    <div class="icon-expanded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+
+
+
                 <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-page="/Index">animeNewsProject</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/New_Anime">New Anime</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/AddArticle">Add Article</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/testingDB">Test Page</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav">
-                            <li class="nav-item login-link">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
-                            </li>
-                        </ul>
+                    <main role="main" class="pb-3">
+                        <!-- Render the page body content -->
+                        @RenderBody()
+                    </main>
+                </div>
+                
+
+                <!-- Footer section -->
+                
+                <footer role="contentinfo">
+                    <a href="/">
+                        <div class="footer-logo">Anime News Database</div>
+                    </a>
+
+                    <div class="socials-footer">
+                        <a href="#" target="_blank" class="social-icon twitter">Twitter</a>
+                        <a href="#" target="_blank" class="social-icon facebook">Facebook</a>
+                        <a href="#" target="_blank" class="social-icon instagram">Instagram</a>
+                        <a href="#" target="_blank" class="social-icon twitch">Twitch</a>
+                        <a href="#" target="_blank" class="social-icon youtube">YouTube</a>
+                        <a href="#" target="_blank" class="social-icon tiktok">TikTok</a>
                     </div>
-                </div>
-            </nav>
 
-            <img src="images/ANDB_Banner.svg" alt="ANDB Banner" />
-        </header>
+                    <div class="region region-footer">
+                        <nav role="navigation" class="">
+                            <ul class="menu">
+                                <li class="menu-item">
+                                    <a href="#">Help & Customer Service</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">Contact</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">Terms and Conditions</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">Privacy Policy</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">Code of Conduct</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <p>&copy;  @DateTime.Now.Year.ToString() Anime News Database. All Rights Reserved </p>
+                    </div>
+                </footer>
 
-        <div class="container">
-            <main role="main" class="pb-3">
-                <!-- Render the page body content -->
-                @RenderBody()
-            </main>
+                <!-- Include JavaScript libraries -->
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+                <!-- Include custom JavaScript file -->
+                <script src="~/js/site.js" asp-append-version="true"></script>
+
+                <!-- Render optional section for additional scripts -->
+                @await RenderSectionAsync("Scripts", required: false)
+            </div>
         </div>
-
-
-<footer class="dark-wrapper inverse-text">
-    <div class="container inner pt-60 pb-60">
-        <div class="row">
-            <div class="col-md-12 col-lg-3 text-center text-lg-left">
-                <div class="widget">
-                    <div class="space20"></div>
-                    <p>Your #1 Source of Anime News</p>
-                </div>
-                <!-- /.widget -->
-            </div>
-            <!-- /column -->
-            <div class="space30 d-lg-none d-xl-none"></div>
-            <div class="col-md-4 col-lg-2 offset-lg-3">
-                <div class="widget">
-                    <h5 class="widget-title">Learn More</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="nocolor">About Us</a></li>
-                        <li><a href="#" class="nocolor">Our Story</a></li>
-                        <li><a href="#" class="nocolor">Projects</a></li>
-                        <li><a href="#" class="nocolor">Features</a></li>
-                    </ul>
-                </div>
-                <!-- /.widget -->
-            </div>
-            <!-- /column -->
-            <div class="col-md-4 col-lg-2">
-                <div class="widget">
-                    <h5 class="widget-title">Social</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="nocolor">Facebook</a></li>
-                        <li><a href="#" class="nocolor">Twitter</a></li>
-                        <li><a href="#" class="nocolor">Instagram</a></li>
-                        <li><a href="#" class="nocolor">Flickr</a></li>
-                    </ul>
-                </div>
-                <!-- /.widget -->
-            </div>
-            <!-- /column -->
-            <div class="col-md-4 col-lg-2">
-                <div class="widget">
-                    <h5 class="widget-title">Contact</h5>
-                </div>
-                <!-- /.widget -->
-            </div>
-            <!-- /column -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-    <div class="sub-footer dark-wrapper inverse-text">
-        <div class="container inner pt-30 pb-30 d-md-flex align-items-md-center text-center">
-            <div class="mr-auto">
-                        &copy; 2023 - animeNewsProject - <a asp-area="" asp-page="/Privacy">Privacy</a>
-            </div>
-            <!-- /div -->
-            <div class="space20 d-md-none"></div>
-            <div class="ml-auto text-md-right">
-                <ul class="social social-bg social-s">
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                    <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                </ul>
-            </div>
-            <!-- /div -->
-        </div>
-        <!-- /.container -->
-    </div>
-    <!-- /.sub-footer -->
-</footer>
-</div>
-<!-- /.content-wrapper -->
-  @*  <script src="/js/jquery.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/revolution/js/jquery.themepunch.tools.min.js"></script>
-    <script src="/revolution/js/jquery.themepunch.revolution.min.js"></script>
-    <script src="/revolution/revolution-addons/filmstrip/js/revolution.addon.filmstrip.min.js"></script>
-    <script src="/revolution/revolution-addons/typewriter/js/revolution.addon.typewriter.min.js"></script>
-    <script src="/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-    <script src="/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-    <script src="/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-    <script src="/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-    <script src="/revolution/js/extensions/revolution.extension.migration.min.js"></script>
-    <script src="/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-    <script src="/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-    <script src="/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-    <script src="/revolution/js/extensions/revolution.extension.video.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="/js/scripts.js"></script>*@
-<!-- Include JavaScript libraries -->
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Include custom JavaScript file -->
-<script src="~/js/site.js" asp-append-version="true"></script>
-
-<!-- Render optional section for additional scripts -->
-@await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+    </body>
+    </html>
