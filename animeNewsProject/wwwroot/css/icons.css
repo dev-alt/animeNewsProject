@@ -1,0 +1,144 @@
+﻿.search-icon::before {
+    content: url('/images/icons/search-icon.png');
+    display: inline-block;
+
+    /* Add any additional styling properties as needed */
+}
+.menu-icon::before {
+    content: url('/images/icons/menu-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+
+.social-facebook::after {
+content: url('/images/icons/socials/facebook.svg');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+
+}
+.social-twitter::after {
+content: url('/images/icons/twitter-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+
+}
+.social-instagram::after {
+    content: url('/images/icons/socials/instagram-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-youtube::after {
+    content: url('/images/icons/socials/youtube-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-pinterest::after {
+    content: url('/images/icons/socials/pinterest-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-linkedin::after {
+    content: url('/images/icons/socials/linkedin-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-googleplus::after {
+    content: url('/images/icons/socials/googleplus-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-rss::after {
+    content: url('/images/icons/socials/rss-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-email::after {
+    content: url('/images/icons/socials/email-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-phone::after {
+    content: url('/images/icons/socials/phone-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-fax::after {
+    content: url('/images/icons/socials/fax-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-mail::after {
+    content: url('/images/icons/socials/mail-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-chat::after {
+    content: url('/images/icons/socials/chat-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-skype::after {
+    content: url('/images/icons/socials/skype-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-whatsapp::after {
+    content: url('/images/icons/socials/whatsapp-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-viber::after {
+    content: url('/images/icons/socials/viber-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-wechat::after {
+    content: url('/images/icons/socials/wechat-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-qq::after {
+    content: url('/images/icons/socials/qq-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-weibo::after {
+    content: url('/images/icons/socials/weibo-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-tumblr::after {
+    content: url('/images/icons/socials/tumblr-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-vimeo::after {
+    content: url('/images/icons/socials/vimeo-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-yelp::after {
+    content: url('/images/icons/socials/yelp-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-tripadvisor::after {
+    content: url('/images/icons/socials/tripadvisor-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-foursquare::after {
+    content: url('/images/icons/socials/foursquare-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-tiktok::after {
+content: url('/images/icons/socials/tiktok-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
+.social-twitch::after {
+content: url('/images/icons/socials/twitch-icon.png');
+    display: inline-block;
+    /* Add any additional styling properties as needed */
+}
