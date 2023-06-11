@@ -1,4 +1,4 @@
-﻿.search-icon::before {
+.search-icon::before {
     content: url('/images/icons/search-icon.png');
     display: inline-block;
 
