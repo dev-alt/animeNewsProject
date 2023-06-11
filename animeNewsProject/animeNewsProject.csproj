@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Images\ANDB_Banner.svg" />
+    <Compile Remove="wwwroot\css\color\**" />
+    <Compile Remove="wwwroot\lib\NewFolder\**" />
+    <Content Remove="wwwroot\css\color\**" />
+    <Content Remove="wwwroot\lib\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\css\color\**" />
+    <EmbeddedResource Remove="wwwroot\lib\NewFolder\**" />
+    <None Remove="wwwroot\css\color\**" />
+    <None Remove="wwwroot\lib\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\js\site.js" />
   </ItemGroup>
 
@@ -15,11 +25,6 @@
     <PackageReference Include="bootstrap" Version="5.3.0" />
     <PackageReference Include="font-awesome" Version="4.7.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.19.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\color\" />
-    <Folder Include="wwwroot\lib\NewFolder\" />
   </ItemGroup>
 
 </Project>
