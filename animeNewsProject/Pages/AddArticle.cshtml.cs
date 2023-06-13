@@ -32,8 +32,8 @@ namespace animeNewsProject.Pages
 
             try
             {
-                // Set the DatePublished property to the current UTC time
-                Article.DatePublished = DateTime.UtcNow;
+                //// Set the DatePublished property to the current UTC time
+                //Article.DatePublished = DateTime.UtcNow;
 
                 // Specify the collection name
                 var collectionName = "articles";

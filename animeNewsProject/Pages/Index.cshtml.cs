@@ -22,6 +22,8 @@ namespace animeNewsProject.Pages
         public int ArticlesPerPage { get; set; } = 6; // Adjust the number of articles per page
 
         public int TotalPages { get; set; }
+        public int TotalArticleCount { get; set; } // Property to hold the total count
+
 
         private readonly ILogger<IndexModel> _logger;
         private readonly MongoDbService _mongoDbService;
@@ -33,26 +35,9 @@ namespace animeNewsProject.Pages
             _logger = logger;
             _mongoDbService = mongoDbService;
 
-            CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
+            //CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
         }
 
-        //public IActionResult OnPostDelete(string id)
-        //{
-        //    try
-        //    {
-        //        var collectionName = "articles";
-        //        _mongoDbService.DeleteEntry<AnimeArticle>(collectionName, id);
-
-        //        // Redirect to the Articles page after successful deletion
-        //        return RedirectToPage("/Index");
-        //    }
-        //    catch
-        //    {
-        //        // Handle the exception (e.g., log or display an error message)
-        //        ModelState.AddModelError(string.Empty, "Error occurred while deleting the article.");
-        //        return Page();
-        //    }
-        //}
 
         public void OnGet()
         {
@@ -72,6 +57,8 @@ namespace animeNewsProject.Pages
                     // No search query, show all articles
                     SearchResults = CollectionData;
                 }
+                // Set the total count
+                TotalArticleCount = SearchResults.Count;
 
                 // Apply pagination
                 TotalPages = (int)Math.Ceiling(SearchResults.Count / (double)ArticlesPerPage);
