@@ -96,7 +96,14 @@
         @foreach (var article in Model.SearchResults.OrderByDescending(a => a.DatePublished))
         {
             <div class="card">
-                <img src="" alt="Article Image" class="card-image">
+                @if (!string.IsNullOrEmpty(article.Image))
+                {
+                    <img src="@article.Image" alt="Article Image" class="card-image">
+                }
+                else
+                {
+                    <img src="/images/default.png" alt="Placeholder Image" class="card-image">
+                }
                 <div class="card-content">
                     <a href="/news?id=@article.DocumentId" class="card-link">
                         <h3 class="card-title">@article.Title</h3>

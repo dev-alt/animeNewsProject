@@ -41,6 +41,7 @@ namespace animeNewsProject.Pages
 
         public void OnGet()
         {
+
             try
             {
                 CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace animeNewsProject.Pages
 {
-    public class interviewsModel : PageModel
+    public class InterviewsModel : PageModel
     {
         public void OnGet()
         {
