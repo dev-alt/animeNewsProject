@@ -11,6 +11,9 @@ namespace animeNewsProject
     {
         public static void Main(string[] args)
         {
+
+            
+
             // Create a new web application builder
             var builder = WebApplication.CreateBuilder(args);
 
