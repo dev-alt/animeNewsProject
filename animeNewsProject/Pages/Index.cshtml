@@ -62,6 +62,15 @@
         margin-bottom: 15px;
     }
 
+
+    .card-image {
+        max-width: 100%;
+        max-height: 200px; /* Adjust the desired maximum height */
+        object-fit: cover;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
     .card-link {
         color: #007bff;
         text-decoration: none;
@@ -75,7 +84,10 @@
 
 
     <p>Total Articles: @Model.TotalArticleCount</p>
-    <p>Total Articles Shown on this page: @(Model.SearchResults?.Count ?? 0)</p>
+<p>Total Articles Shown on this page: @(Model.SearchResults?.Count ?? 0)</p>
+
+<p>Auth</p>
+
 
 <div class="container py-5">
     
@@ -99,12 +111,24 @@
             @foreach (var article in Model.SearchResults?.OrderByDescending(a => a.Views).Take(6) ?? new List<AnimeArticle>())
             {
                 <div class="card">
-                    <img src="" alt="Article Image" class="card-image">
+                    @if (!string.IsNullOrEmpty(article.Image))
+                    {
+                        <img src="@article.Image" alt="Article Image" class="card-image">
+                    }
+                    else
+                    {
+                        <img src="/images/default.png" alt="Placeholder Image" class="card-image">
+                    }
                     <div class="card-content">
                         <a href="/news?id=@article.DocumentId" class="card-link">
                             <h3 class="card-title">@article.Title</h3>
                         </a>
-                        <p class="card-text">@TruncateText(article.Text, 100)</p>
+                        <p class="card-text">
+                            @if (article.Text != null)
+                            {
+                                @TruncateText(article.Text, 100)
+                            }
+                        </p>
                         <a href="/news?id=@article.DocumentId" class="card-link">Read More</a>
                     </div>
                 </div>
@@ -119,17 +143,28 @@
     </div>
     <!-- Show latest articles -->
     <h2 class="mb-4">Latest articles released</h2>
-    <div class="card-group">
+    <div class="card-group custom-card-group">
         @foreach (var article in Model.SearchResults.OrderByDescending(a => a.DatePublished).Take(3))
-   
         {
             <div class="card">
-                <img src="" alt="Article Image" class="card-image">
+                @if (!string.IsNullOrEmpty(article.Image))
+                {
+                    <img src="@article.Image" alt="Article Image" class="card-image">
+                }
+                else
+                {
+                    <img src="/images/default.png" alt="Placeholder Image" class="card-image">
+                }
                 <div class="card-content">
                     <a href="/news?id=@article.DocumentId" class="card-link">
                         <h3 class="card-title">@article.Title</h3>
                     </a>
-                    <p class="card-text">@TruncateText(article.Text, 100)</p>
+                    <p class="card-text">
+                        @if (article.Text != null)
+                        {
+                            @TruncateText(article.Text, 100)
+                        }
+                    </p>
                     <a href="/news?id=@article.DocumentId" class="card-link">Read More</a>
                 </div>
             </div>

@@ -37,5 +37,8 @@ namespace animeNewsProject.Pages
 
         [BsonElement("views")]
         public int Views { get; set; }
+
+        [BsonElement("image")]
+        public string? Image { get; set; } // Add the image field
     }
 }

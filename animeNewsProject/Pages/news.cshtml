@@ -2,32 +2,17 @@
 @model animeNewsProject.Pages.NewsModel
 
 <style>
-    .button {
-        display: inline-block;
-        padding: 8px 16px;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
-        color: #333;
-        text-decoration: none;
-        font-size: 14px;
-        border-radius: 4px;
+    /* CSS styles */
+
+    .article-image {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
     }
 
-    .button-primary {
-        background-color: #007bff;
-        color: #fff;
-    }
+    /* Rest of the CSS styles */
 
-    .button-danger {
-        background-color: #dc3545;
-        color: #fff;
-    }
-
-    .button-container {
-        margin-top: 10px;
-    }
 </style>
-
 
 <p></p>
 <p></p>
@@ -36,6 +21,17 @@
     @if (Model.Article != null)
     {
         <h2 class="article-title">@Model.Article.Title</h2>
+        
+        <!-- Display the image -->
+        @if (!string.IsNullOrEmpty(Model.Article.Image))
+        {
+            <img src="@Model.Article.Image" alt="Article Image" class="card-image">
+        }
+        else
+        {
+            <img src="/images/default.png" alt="Placeholder Image" class="card-image">
+        }
+        
         <p class="article-text">@Model.Article.Text</p>
         <div class="article-info">
             <p>Category: @Model.Article.Category</p>

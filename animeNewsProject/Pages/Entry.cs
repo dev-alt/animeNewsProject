@@ -5,6 +5,7 @@ namespace animeNewsProject.Pages
 {
     public class Entry
     {
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("_id")]
@@ -38,5 +39,8 @@ namespace animeNewsProject.Pages
 
         [BsonElement("views")]
         public int Views { get; set; }
+
+        [BsonElement("image")]
+        public string? Image { get; set; } // Add the image field
     }
 }
