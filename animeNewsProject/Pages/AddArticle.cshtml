@@ -1,57 +1,63 @@
 ﻿@page
 @model animeNewsProject.Pages.AddArticleModel
 @{
-
 }
-<form method="post">
-    <!-- Title -->
-    <div class="mb-3">
-        <label for="title" class="form-label">Title:</label>
-        <input type="text" id="title" name="title" class="form-control" required>
-    </div>
-    
-    <!-- Text -->
-    <div class="mb-3">
-        <label for="text" class="form-label">Text:</label>
-        <textarea id="text" name="text" rows="4" class="form-control" required></textarea>
-    </div>
-    
-    <!-- Date Published -->
-    <div class="mb-3">
-        <label for="date_published" class="form-label">Date Published:</label>
-        <input type="date" id="date_published" name="date_published" class="form-control" required>
-    </div>
-    
-    <!-- Rating -->
-    <div class="mb-3">
-        <label for="rating" class="form-label">Rating:</label>
-        <input type="number" id="rating" name="rating" step="0.1" class="form-control" required>
-    </div>
 
-    <!-- Author ID -->
-    <div class="mb-3">
-        <label for="author_id" class="form-label">Author ID:</label>
-        <input type="number" id="author_id" name="authorId" class="form-control">
-    </div>
+<h1>Add Article</h1>
 
-    <!-- Source ID -->
-    <div class="mb-3">
-        <label for="source_id" class="form-label">Source ID:</label>
-        <input type="number" id="source_id" name="sourceId" class="form-control">
-    </div>
-    
-    <!-- Category -->
-    <div class="mb-3">
-        <label for="category" class="form-label">Category:</label>
-        <input type="text" id="category" name="category" class="form-control" required>
-    </div>
-    
-    <!-- Views -->
-    <div class="mb-3">
-        <label for="views" class="form-label">Views:</label>
-        <input type="number" id="views" name="views" class="form-control" required>
-    </div>
-    
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Add Entry</button>
-</form>
+<div class="edit-article-container">
+    <form method="post">
+        <!-- Title -->
+        <div class="form-group">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" id="title" name="title" class="form-control" required>
+        </div>
+
+        <!-- Text -->
+        <div class="form-group">
+            <label for="text" class="form-label">Text:</label>
+            <textarea id="text" name="text" rows="4" class="form-control" required></textarea>
+        </div>
+
+        <!-- Date Published -->
+        <div class="form-group">
+            <label for="date_published" class="form-label">Date Published:</label>
+            <input type="date" id="date_published" name="date_published" class="form-control" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
+        </div>
+
+        <!-- Rating -->
+        <div class="form-group">
+            <label for="rating" class="form-label">Rating:</label>
+            <input type="number" id="rating" name="rating" step="0.1" class="form-control" required>
+        </div>
+
+        <!-- Author ID -->
+        <div class="form-group">
+            <label for="author_id" class="form-label">Author ID:</label>
+            <input type="number" id="author_id" name="authorId" class="form-control">
+        </div>
+
+        <!-- Source ID -->
+        <div class="form-group">
+            <label for="source_id" class="form-label">Source ID:</label>
+            <input type="number" id="source_id" name="sourceId" class="form-control">
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+            <label for="category" class="form-label">Category:</label>
+            <input type="text" id="category" name="category" class="form-control" required>
+        </div>
+
+        <!-- Views -->
+        <div class="form-group">
+            <label for="views" class="form-label">Views:</label>
+            <input type="number" id="views" name="views" class="form-control" required>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group article-actions">
+            <button type="submit" class="btn btn-primary">Add Entry</button>
+        </div>
+    </form>
+</div>
