@@ -5,79 +5,6 @@
     ViewData["Title"] = "All Articles";
 }
 
-<<<<<<< HEAD
-=======
-
-<style>
-    .card-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .card-group {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-
-    .card {
-        width: calc(33.33% - 10px);
-        margin-bottom: 20px;
-    }
-
-    .card-content {
-        padding: 10px;
-    }
-
-    .card {
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        transition: transform 0.3s ease;
-    }
-
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-    .card-image {
-        width: 100%;
-        height: auto;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-
-    .card-content {
-        padding: 15px;
-    }
-
-    .card-title {
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-
-    .card-text {
-        margin-bottom: 15px;
-    }
-
-    .card-link {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-        .card-link:hover {
-            text-decoration: underline;
-        }
-</style>
-
->>>>>>> master
 <!-- Search form -->
 <form method="get" action="@Request.Path">
     <div class="form-group">
@@ -88,7 +15,6 @@
 
 
 
-<<<<<<< HEAD
 
 <h1>All Articles</h1>
 
@@ -96,17 +22,6 @@
     <!-- Add custom class to the card-group container -->
     <div class="card-group custom-card-group">
         @foreach (var article in Model.SearchResults!.OrderByDescending(a => a.DatePublished).ToList())
-=======
-<h1>All Articles</h1>
-
-
-@*        @foreach (var article in Model.SearchResults ?? new List<AnimeArticle>())*@
-
-<div class="card-group">
-    <!-- Add custom class to the card-group container -->
-    <div class="card-group custom-card-group">
-        @foreach (var article in Model.SearchResults.OrderByDescending(a => a.DatePublished))
->>>>>>> master
         {
             <div class="card">
                 @if (!string.IsNullOrEmpty(article.Image))
@@ -130,7 +45,6 @@
 </div>
 
 @functions {
-<<<<<<< HEAD
     private static string TruncateText(string? text, int maxLength)
     {
         if (string.IsNullOrEmpty(text))
@@ -138,21 +52,11 @@
             return string.Empty;
         }
 
-=======
-    public string TruncateText(string text, int maxLength)
-    {
->>>>>>> master
         if (text.Length > maxLength)
         {
             return text.Substring(0, maxLength) + "...";
         }
-<<<<<<< HEAD
 
         return text;
     }
 }
-=======
-        return text;
-    }
-}
->>>>>>> master
