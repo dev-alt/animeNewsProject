@@ -1,0 +1,62 @@
+﻿@page
+@model animeNewsProject.Pages.ArticlesModel
+
+@{
+    ViewData["Title"] = "All Articles";
+}
+
+<!-- Search form -->
+<form method="get" action="@Request.Path">
+    <div class="form-group">
+        <input type="text" class="form-control" name="search" placeholder="Search articles">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+    </div>
+</form>
+
+
+
+
+<h1>All Articles</h1>
+
+<div class="card-group">
+    <!-- Add custom class to the card-group container -->
+    <div class="card-group custom-card-group">
+        @foreach (var article in Model.SearchResults!.OrderByDescending(a => a.DatePublished).ToList())
+        {
+            <div class="card">
+                @if (!string.IsNullOrEmpty(article.Image))
+                {
+                    <img src="@article.Image" alt="Article Image" class="card-image">
+                }
+                else
+                {
+                    <img src="/images/default.png" alt="Placeholder Image" class="card-image">
+                }
+                <div class="card-content">
+                    <a href="/news?id=@article.DocumentId" class="card-link">
+                        <h3 class="card-title">@article.Title</h3>
+                    </a>
+                    <p class="card-text">@TruncateText(article.Text, 100)</p>
+                    <a href="/news?id=@article.DocumentId" class="card-link">Read More</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@functions {
+    private static string TruncateText(string? text, int maxLength)
+    {
+        if (string.IsNullOrEmpty(text))
+        {
+            return string.Empty;
+        }
+
+        if (text.Length > maxLength)
+        {
+            return text.Substring(0, maxLength) + "...";
+        }
+
+        return text;
+    }
+}

@@ -2,31 +2,39 @@
 @model animeNewsProject.Pages.AddArticleModel
 @{
 
-}
-<form method="post">
-    <!-- Title -->
-    <div class="mb-3">
-        <label for="title" class="form-label">Title:</label>
-        <input type="text" id="title" name="title" class="form-control" required>
-    </div>
-    
-    <!-- Text -->
-    <div class="mb-3">
-        <label for="text" class="form-label">Text:</label>
-        <textarea id="text" name="text" rows="4" class="form-control" required></textarea>
-    </div>
-    
-    <!-- Date Published -->
-    <div class="mb-3">
-        <label for="date_published" class="form-label">Date Published:</label>
-        <input type="date" id="date_published" name="date_published" class="form-control" required>
-    </div>
-    
-    <!-- Rating -->
-    <div class="mb-3">
-        <label for="rating" class="form-label">Rating:</label>
-        <input type="number" id="rating" name="rating" step="0.1" class="form-control" required>
-    </div>
+<h1>Add Article</h1>
+
+<div class="edit-article-container">
+    <form method="post" enctype="multipart/form-data">
+        <!-- Title -->
+        <div class="form-group">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" id="title" name="title" class="form-control" required>
+        </div>
+
+        <!-- Text -->
+        <div class="form-group">
+            <label for="text" class="form-label">Text:</label>
+            <textarea id="text" name="text" rows="4" class="form-control" required></textarea>
+        </div>
+        
+        <!-- Image -->
+        <div class="form-group">
+            <label for="image" class="form-label">Image:</label>
+            <input type="file" id="image" name="imageFile" class="form-control">
+        </div>
+
+        <!-- Date Published -->
+        <div class="form-group">
+            <label for="date_published" class="form-label">Date Published:</label>
+            <input type="date" id="date_published" name="date_published" class="form-control" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
+        </div>
+
+        <!-- Rating -->
+        <div class="form-group">
+            <label for="rating" class="form-label">Rating:</label>
+            <input type="number" id="rating" name="rating" step="0.1" class="form-control" required>
+        </div>
 
     <!-- Author ID -->
     <div class="mb-3">

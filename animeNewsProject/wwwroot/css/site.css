@@ -1335,3 +1335,56 @@ header {
 .header-social-links .social-icon.tiktok {
     background: url(/images/icons/socials/header_tiktok.svg)no-repeat 100% 100%
 }
+
+@media screen and (max-width: 1150px) {
+    .header-nav {
+        display: none
+    }
+}
+.expanded .header-icon {
+    padding-bottom: 1.1rem
+}
+
+
+@media screen and (max-width: 1150px) {
+    .header-right-container .search-button,
+    .header-right-container .user-button {
+        display: none;
+    }
+
+    .header-right-container .expanded-menu-button {
+        width: 2rem;
+        height: 6rem;
+        position: absolute;
+        top: 0;
+        right: 2rem;
+        z-index: 5;
+        cursor: pointer;
+        font-size: 1.7rem;
+    }
+
+        .header-right-container .expanded-menu-button .icon-expanded {
+            position: absolute;
+            margin-top: 2.2rem;
+        }
+}
+
+.hamburger-menu {
+    right: -400px;
+    top: 0;
+    height: 100%;
+    position: fixed;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 200px;
+    font-size: 1.7rem;
+    padding: 130px 30px 30px;
+}
+
+.expanded-menu-button.close + .hamburger-menu {
+    right: 0; 
+}
+
+.header-dropdown, .hamburger-menu {
+    background-color: #fff;
+}
