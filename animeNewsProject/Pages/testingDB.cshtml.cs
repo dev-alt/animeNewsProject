@@ -58,6 +58,8 @@ namespace animeNewsProject.Pages
             }
         }
 
+
+
         public bool IsConnected()
         {
             try
