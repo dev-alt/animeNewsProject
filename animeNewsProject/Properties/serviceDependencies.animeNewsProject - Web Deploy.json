@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "identityapp1": {
+      "type": "identityapp.default",
+      "dynamicId": null
+    },
+    "storage1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/animeNewsProject/providers/Microsoft.ServiceLinker/linkers/andbconnect_1AC8D8ED0B, /subscriptions/1c36ef89-ead3-4788-b507-3cdf6c2ab981/resourcegroups/animeNewsProject20230526204137ResourceGroup/providers/Microsoft.Web/sites/animeNewsProject/providers/Microsoft.ServiceLinker/linkers/andbconnect_2E036995B5",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/andbstorage",
+      "type": "storage.azure",
+      "connectionId": "andbconnect",
+      "dynamicId": null
+    }
+  }
+}

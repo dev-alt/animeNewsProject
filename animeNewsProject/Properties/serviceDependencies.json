@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "identityapp1": {
+      "type": "identityapp",
+      "dynamicId": null
+    },
+    "storage1": {
+      "type": "storage",
+      "connectionId": "andbconnect",
+      "dynamicId": null
+    }
+  }
+}

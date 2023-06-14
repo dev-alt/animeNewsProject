@@ -1,0 +1,23 @@
+﻿@page
+@model animeNewsProject.Pages.Test2Model
+
+<h1>Test Azure Blob Storage</h1>
+
+<p>Is MongoDB Connected: @Model.IsMongoDbConnected</p>
+<p>MongoDB Connection String: @Model.MongoDbConnectionString</p>
+
+
+@if (Model.DatabaseNames.Any())
+{
+    <h2>Database Names:</h2>
+    <ul>
+        @foreach (var dbName in Model.DatabaseNames)
+        {
+            <li>@dbName</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No databases found.</p>
+}
