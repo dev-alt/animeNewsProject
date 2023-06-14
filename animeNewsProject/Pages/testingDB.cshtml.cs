@@ -1,8 +1,12 @@
+using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Driver;
 
 namespace animeNewsProject.Pages
 {
+
     public class TestingDbModel : PageModel
     {
         private readonly MongoDbService _mongoDbService;
@@ -18,24 +22,17 @@ namespace animeNewsProject.Pages
             IsMongoDbConnected = IsConnected();
             MongoDbConnectionString = GetMongoDbConnectionString();
             DatabaseNames = GetDatabaseNames();
-            BlobStorageConnectionString = blobStorageService.GetConnectionString();
+
         }
 
 
-        //public string GetConnectionString()
+
+        //public string GetMongoDbConnectionString()
         //{
-        //    var connectionString = _blobStorageService.GetBlobServiceClient();
+        //    var connectionString = _mongoDbService.GetMongoClient().Settings.ToString();
         //    var formattedConnectionString = connectionString.Replace(";", "; ");
         //    return formattedConnectionString;
         //}
-
-        //public string GetConnectionString()
-        //{
-        //    var connectionString = _blobStorageService.GetBlobClient().AccountName;
-        //    var formattedConnectionString = connectionString.Replace(";", "; ");
-        //    return formattedConnectionString;
-        //}
-
         public string GetMongoDbConnectionString()
         {
             var connectionString = _mongoDbService.GetMongoClient().Settings.ToString();
@@ -53,7 +50,13 @@ namespace animeNewsProject.Pages
                     var key = parts[0].Trim();
                     var value = parts[1].Trim();
 
+                    if (key.ToLower() == "credentials")
+                        continue; // Skip the line with "Credentials"
 
+                    yield return new KeyValuePair<string, string>(key, value);
+                }
+            }
+        }
 
         public bool IsConnected()
         {
@@ -67,14 +70,6 @@ namespace animeNewsProject.Pages
                 return false;
             }
         }
-
-        public string GetMongoDbConnectionString()
-        {
-            var connectionString = _mongoDbService.GetMongoClient().Settings.ToString();
-            var formattedConnectionString = connectionString.Replace(";", "; ");
-            return formattedConnectionString;
-        }
-
         private List<string> GetDatabaseNames()
         {
             try

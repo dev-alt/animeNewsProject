@@ -17,6 +17,7 @@ namespace animeNewsProject.Pages
             _articleRepository = articleRepository;
             UpdatedArticle = new AnimeArticle(); // Initialize the UpdatedArticle property with a non-null value
         }
+
         public async Task<IActionResult> OnGetAsync(string id)
         {
             UpdatedArticle = await _articleRepository.GetArticleByIdAsync(id);

@@ -25,7 +25,7 @@ namespace animeNewsProject.Pages
             }
         }
 
-         private static bool IsValidUser(string username, string password)
+        private static bool IsValidUser(string username, string password)
         {
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -38,9 +38,9 @@ namespace animeNewsProject.Pages
 
             return true;
         }
-        
+
         public void OnGet()
-            {
-            }
+        {
         }
     }
+}

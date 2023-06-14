@@ -1,23 +1,55 @@
 ﻿@page
 @model animeNewsProject.Pages.NewsModel
 
+<style>
+    /* CSS styles */
 
+    .article-image {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
 
-<div>
-    <h1>@Model.Article.Title</h1>
-    <p>Category: @Model.Article.Category</p>
-    <p>Date Published: @Model.Article.DatePublished</p>
-    <p>Rating: @Model.Article.Rating</p>
-    <p>Views: @Model.Article.Views</p>
-    <p>@Model.Article.Text</p>
-</div>
+    /* Rest of the CSS styles */
 
-<div>
-    <a href="~/edit?id=@Model.Article.DocumentId" class="btn btn-primary">Edit</a>
+</style>
 
+<p></p>
+<p></p>
+<p></p>
+<div class="article-box">
+    @if (Model.Article != null)
+    {
+        <h2 class="article-title">@Model.Article.Title</h2>
 
+        <!-- Display the image -->
+        @if (!string.IsNullOrEmpty(Model.Article.Image))
+        {
+            <img src="@Model.Article.Image" alt="Article Image" class="card-image">
+        }
+        else
+        {
+            <img src="/images/default.png" alt="Placeholder Image" class="card-image">
+        }
 
-    <form method="post" action="~/news/delete/@Model.Article.DocumentId">
-        <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+        <p class="article-text">@Model.Article.Text</p>
+        <div class="article-info">
+            <p>Category: @Model.Article.Category</p>
+            <p>Date Published: @Model.Article.DatePublished</p>
+            <p>Rating: @Model.Article.Rating</p>
+            <p>Views: @Model.Article.Views</p>
+        </div>
+        <div class="article-actions">
+            <div class="button-container">
+                <a href="~/edit?id=@Model.Article.DocumentId" class="button button-primary">Edit</a>
+                <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Article.DocumentId">
+                    <button type="submit" class="button button-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Article not found.</p>
+    }
 </div>

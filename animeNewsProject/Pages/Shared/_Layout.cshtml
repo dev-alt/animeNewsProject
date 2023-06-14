@@ -1,6 +1,6 @@
-﻿    @using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
-    <!DOCTYPE html>
-    <html lang="en">
+﻿@using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <!-- Set the character encoding and viewport -->
@@ -16,53 +16,58 @@
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
 </head>
 
-    <body>
-        <a href="#main-content" class="visually-hidden focusable skip-link">
-            Skip to main content
-        </a>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+        Skip to main content
+    </a>
 
-        <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
 
-            <h1 class="page-title visually-hidden">Anime News Database</h1>
+        <h1 class="page-title visually-hidden">Anime News Database</h1>
 
-            <div class="layout-container front-page">
-                <!-- Include the header file -->
-                <div class="top-bar expanded">
-                    <header id="navbar" role="banner">
-                        <div class="max-width-container">
-                            <div class="header-logo">
-                                <div class="region region-header-logo">
-                                    <div id="block-gi5-branding" class="block block-system block-system-branding-block">
-                                        <a href="/" rel="home" class="site-logo">
-                                            <img src="/images/andb-banner.svg" alt="Home" />
-                                        </a>
-                                    </div>
+        <div class="layout-container front-page">
+            <!-- Header section -->
+            <div class="top-bar expanded">
+                <header id="navbar" role="banner">
+                    <div class="max-width-container">
+                        <!-- Header logo -->
+                        <div class="header-logo">
+                            <div class="region region-header-logo">
+                                <div class="block block-system block-system-branding-block">
+                                    <a href="/" rel="home" class="site-logo">
+                                        <img src="/images/logo.svg" alt="Home" />
+                                    </a>
                                 </div>
                             </div>
-                            <div class="header-left-container">
-                                <div class="header-social-links">
-                                    <div class="header-icon">
-                                        <a href="#" target="_blank" class="social-icon twitter">Twitter</a>
-                                    </div>
-                                    <div class="header-icon">
-                                        <a href="#" target="_blank" class="social-icon facebook">Facebook</a>
-                                    </div>
-                                    <div class="header-icon">
-                                        <a href="#" target="_blank" class="social-icon instagram">Instagram</a>
-                                    </div>
-                                    <div class="header-icon">
-                                        <a href="#" target="_blank" class="social-icon twitch">Twitch</a>
-                                    </div>
-                                    <div class="header-icon">
-                                        <a href="#" target="_blank" class="social-icon youtube">YouTube</a>
-                                    </div>
-                                    <div class="header-icon">
-                                        <a href="#" target="_blank" class="social-icon tiktok">TikTok</a>
-                                    </div>
+                        </div>
+                        <!-- Header social links -->
+                        <div class="header-left-container">
+                            <div class="main-header header-social-links">
+                                <!-- Social icons -->
+                                <div class="header-icon">
+                                    <a href="#" target="_blank" class="social-icon twitter">Twitter</a>
+                                </div>
+                                <div class="header-icon">
+                                    <a href="#" target="_blank" class="social-icon facebook">Facebook</a>
+                                </div>
+                                <div class="header-icon">
+                                    <a href="#" target="_blank" class="social-icon instagram">Instagram</a>
+                                </div>
+                                <div class="header-icon">
+                                    <a href="#" target="_blank" class="social-icon twitch">Twitch</a>
+                                </div>
+                                <div class="header-icon">
+                                    <a href="#" target="_blank" class="social-icon youtube">YouTube</a>
+                                </div>
+                                <div class="header-icon">
+                                    <a href="#" target="_blank" class="social-icon tiktok">TikTok</a>
                                 </div>
                             </div>
+                        </div>
 
                         <!-- Main navigation -->
                         <div class="header-nav">
@@ -94,7 +99,6 @@
                                             <a class="nav-link" href="/podcasts">PODCASTS</a>
                                         </li>
                                     </ul>
-
                                 </nav>
                             </div>
                         </div>
@@ -109,21 +113,49 @@
                                     <div class="user-icon icon-missing"></div>
                                 </div>
                             </div>
-                            <div class="header-icon expanded-menu-button">
+                            <div id="expanded-menu-button" class="header-icon expanded-menu-button">
                                 <div class="icon-expanded"></div>
                             </div>
                         </div>
                     </div>
                 </header>
+                <div class="hamburger-menu">
+                    <div class="nav-menu">
+                        <ul class="menu">
+                            <!-- Menu items -->
+                            <li class="menu-item">
+                                <a class="nav-link" href="/">HOME</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/">NEWS</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/reviews">REVIEWS</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/features">FEATURES</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/interviews">INTERVIEWS</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/videos">VIDEOS</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/podcasts">PODCASTS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <main role="main">
-                
+
                 <div class="custom-navbar">
                     <ul class="custom-navbar-list">
                         <li class="custom-navbar-item">
                             <a class="custom-navbar-link" asp-area="" asp-page="/Index">Home</a>
-                        </li> 
+                        </li>
                         <li class="custom-navbar-item">
                             <a class="custom-navbar-link" asp-area="" asp-page="/AddArticle">Add Article</a>
                         </li>
@@ -141,60 +173,60 @@
 
 
 
-                <div class="container">
-                    <main role="main" class="pb-3">
-                        <!-- Render the page body content -->
-                        @RenderBody()
-                    </main>
+
+                <!-- Render the page body content -->
+                @RenderBody()
+            </main>
+
+            <!-- Footer section -->
+            <footer role="contentinfo">
+                <!-- Footer logo -->
+                <a href="/">
+                    <div class="footer-logo">Anime News Database</div>
+                </a>
+
+                <!-- Social icons in the footer -->
+                <div class="socials-footer">
+                    <a href="#" target="_blank" class="social-icon twitter">Twitter</a>
+                    <a href="#" target="_blank" class="social-icon facebook">Facebook</a>
+                    <a href="#" target="_blank" class="social-icon instagram">Instagram</a>
+                    <a href="#" target="_blank" class="social-icon twitch">Twitch</a>
+                    <a href="#" target="_blank" class="social-icon youtube">YouTube</a>
+                    <a href="#" target="_blank" class="social-icon tiktok">TikTok</a>
                 </div>
-                
 
-                <!-- Footer section -->
-                
-                <footer role="contentinfo">
-                    <a href="/">
-                        <div class="footer-logo">Anime News Database</div>
-                    </a>
+                <div class="region region-footer">
+                    <nav role="navigation" class="">
+                        <!-- Footer menu -->
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <a href="#">Help & Customer Service</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#">Contact</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#">Terms and Conditions</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#">Privacy Policy</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#">Code of Conduct</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- Footer copyright -->
+                    <p>&copy; @DateTime.Now.Year.ToString() Anime News Database. All Rights Reserved</p>
+                </div>
+            </footer>
 
-                    <div class="socials-footer">
-                        <a href="#" target="_blank" class="social-icon twitter">Twitter</a>
-                        <a href="#" target="_blank" class="social-icon facebook">Facebook</a>
-                        <a href="#" target="_blank" class="social-icon instagram">Instagram</a>
-                        <a href="#" target="_blank" class="social-icon twitch">Twitch</a>
-                        <a href="#" target="_blank" class="social-icon youtube">YouTube</a>
-                        <a href="#" target="_blank" class="social-icon tiktok">TikTok</a>
-                    </div>
+            <!-- Include JavaScript libraries -->
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-                    <div class="region region-footer">
-                        <nav role="navigation" class="">
-                            <ul class="menu">
-                                <li class="menu-item">
-                                    <a href="#">Help & Customer Service</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#">Contact</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#">Terms and Conditions</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#">Privacy Policy</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#">Code of Conduct</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <p>&copy;  @DateTime.Now.Year.ToString() Anime News Database. All Rights Reserved </p>
-                    </div>
-                </footer>
-
-                <!-- Include JavaScript libraries -->
-                <script src="~/lib/jquery/dist/jquery.min.js"></script>
-                <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-                <!-- Include custom JavaScript file -->
-                <script src="~/js/site.js" asp-append-version="true"></script>
+            <!-- Include custom JavaScript file -->
+            <script src="~/js/site.js" asp-append-version="true"></script>
 
             <!-- Render optional section for additional scripts -->
             @await RenderSectionAsync("Scripts", required: false)
@@ -202,4 +234,4 @@
     </div>
 </body>
 
-    </html>
+</html>
