@@ -1,9 +1,18 @@
+using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
+using Microsoft.Identity.Web;
+using Microsoft.Extensions.Configuration;
+
 
 namespace animeNewsProject
 {
@@ -11,18 +20,43 @@ namespace animeNewsProject
     {
         public static void Main(string[] args)
         {
+            DotNetEnv.Env.TraversePath().Load();
+
+            var configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .Build();
+
+            var storageConnectionString = configuration["STORAGE_CONNECTION_STRING"];
+            var mongodbConnectionString = configuration["MONGODB_CONNECTION_STRING"];
+
+            
             // Create a new web application builder
             var builder = WebApplication.CreateBuilder(args);
 
-            // Configure services and register dependencies
+            builder.Services.AddAuthentication(options => configuration.Bind("AzureAd", options))
+                .AddMicrosoftIdentityWebApi(builder.Configuration, "AzureAd")
+                .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddInMemoryTokenCaches();
+
+            builder.Services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            {
+                options.Events.OnRedirectToAccessDenied = context =>
+                {
+                    // Set the error message in ViewData
+                    context.HttpContext.Items["AuthFailed"] = "Authentication failed.";
+
+                    context.Response.Redirect(context.RedirectUri);
+                    return Task.CompletedTask;
+                };
+            });
+
 
             builder.Services.AddSingleton<MongoDbService>(provider =>
             {
-                // Set up the MongoDB connection string
-                var connectionString = "mongodb+srv://9957173:mongodb@cluster0.3xvibw0.mongodb.net/?retryWrites=true&w=majority";
+
 
                 // Create a new MongoDB client with the connection string
-                var client = new MongoClient(connectionString);
+                var client = new MongoClient(mongodbConnectionString);
 
                 // Specify the database name
                 var databaseName = "anime_news_project";
@@ -30,7 +64,25 @@ namespace animeNewsProject
                 // Create and return an instance of the MongoDbService, providing the client and database name
                 return new MongoDbService(client, databaseName);
             });
-            
+
+
+            builder.Services.AddSingleton<BlobStorageService>(provider =>
+            {
+                // Create a new BlobServiceClient using the storage connection string
+                var blobServiceClient = new BlobServiceClient(storageConnectionString);
+
+                // Specify the container name for storing blobs
+                var containerName = "andbstorage"; // Replace with your container name
+
+                // Create and return an instance of the BlobStorageService, providing the BlobServiceClient and container name
+                return new BlobStorageService(blobServiceClient, containerName);
+            });
+
+
+
+
+
+
             // Add scoped services
             builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 
@@ -59,23 +111,12 @@ namespace animeNewsProject
             // Enable routing
             app.UseRouting();
 
+            app.UseAuthentication();
             // Enable authorization
             app.UseAuthorization();
 
             // Map Razor Pages
             app.MapRazorPages();
-
-            // Define a route for handling HTTP GET requests with a page parameter
-            //app.MapGet("/{page?}", async (HttpContext context) =>
-            //{
-            //    // Extract the page parameter from the route values, defaulting to "1" if not provided
-            //    var page = context.Request.RouteValues["page"]?.ToString() ?? "1";
-
-            //    // Send a response with the page number
-            //    await context.Response.WriteAsync($"Page: {page}");
-            //});
-     
-
 
             // Start the application
             app.Run();
