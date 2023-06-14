@@ -414,7 +414,11 @@ header {
     }
 }
 
+<<<<<<< HEAD
 .expanded .header-social-links {
+=======
+.expanded .header-social-links{
+>>>>>>> master
     display: flex;
 }
 
@@ -574,6 +578,16 @@ header:after {
     }
 }
 
+<<<<<<< HEAD
+=======
+/* Media query for extra small devices (phones) */
+@media (max-width: 575.98px) {
+    .site-logo {
+        transform: scale(0.8); /* Adjust the scale value as needed */
+    }
+}
+
+>>>>>>> master
 /* Media query for small devices (tablets) */
 @media (min-width: 576px) and (max-width: 767.98px) {
     .site-logo {
@@ -1301,9 +1315,15 @@ header {
         border-bottom-color: #4b4b4b
     }
 
+<<<<<<< HEAD
     .header-icon.close {
         border-bottom-color: #1f64e2
     }
+=======
+.header-icon.close {
+    border-bottom-color: #1f64e2
+}
+>>>>>>> master
 
 .icon-search {
     background-color: #666
@@ -1366,16 +1386,24 @@ header {
         display: none
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 .expanded .header-icon {
     padding-bottom: 1.1rem
 }
 
 
 @media screen and (max-width: 1150px) {
+<<<<<<< HEAD
     .header-right-container .search-button,
     .header-right-container .user-button {
         display: none;
+=======
+    .header-right-container .search-button, .header-right-container .user-button {
+        display: none
+>>>>>>> master
     }
 
     .header-right-container .expanded-menu-button {
@@ -1386,11 +1414,16 @@ header {
         right: 2rem;
         z-index: 5;
         cursor: pointer;
+<<<<<<< HEAD
         font-size: 1.7rem;
+=======
+        font-size: 1.7rem
+>>>>>>> master
     }
 
         .header-right-container .expanded-menu-button .icon-expanded {
             position: absolute;
+<<<<<<< HEAD
             margin-top: 2.2rem;
         }
 }
@@ -1414,3 +1447,8 @@ header {
 .header-dropdown, .hamburger-menu {
     background-color: #fff;
 }
+=======
+            margin-top: 2.2rem
+        }
+}
+>>>>>>> master

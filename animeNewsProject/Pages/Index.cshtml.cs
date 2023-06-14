@@ -35,7 +35,7 @@ namespace animeNewsProject.Pages
             _logger = logger;
             _mongoDbService = mongoDbService;
 
-            CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
+            //CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
         }
 
 

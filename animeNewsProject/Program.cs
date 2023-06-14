@@ -12,9 +12,12 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using Microsoft.Identity.Web;
 using Microsoft.Extensions.Configuration;
+<<<<<<< HEAD
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Identity.Web.UI;
+=======
+>>>>>>> master
 
 
 namespace animeNewsProject
@@ -23,6 +26,7 @@ namespace animeNewsProject
     {
         public static void Main(string[] args)
         {
+<<<<<<< HEAD
             // Create a logger instance
             var logger = LoggerFactory.Create(builder =>
             {
@@ -34,6 +38,8 @@ namespace animeNewsProject
             logger.LogInformation("Application started.");
 
 
+=======
+>>>>>>> master
             DotNetEnv.Env.TraversePath().Load();
 
             var configuration = new ConfigurationBuilder()
@@ -43,7 +49,11 @@ namespace animeNewsProject
             var storageConnectionString = configuration["STORAGE_CONNECTION_STRING"];
             var mongodbConnectionString = configuration["MONGODB_CONNECTION_STRING"];
 
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> master
             // Create a new web application builder
             var builder = WebApplication.CreateBuilder(args);
 
@@ -67,8 +77,15 @@ namespace animeNewsProject
 
             builder.Services.AddSingleton<MongoDbService>(provider =>
             {
+<<<<<<< HEAD
                 // Create a new MongoDB client with the connection string
                 var client = new MongoClient("mongodb+srv://9957173:mongodb@cluster0.3xvibw0.mongodb.net/?retryWrites=true&w=majority");
+=======
+
+
+                // Create a new MongoDB client with the connection string
+                var client = new MongoClient(mongodbConnectionString);
+>>>>>>> master
 
                 // Specify the database name
                 var databaseName = "anime_news_project";
@@ -83,15 +100,24 @@ namespace animeNewsProject
                 return mongoDbService;
             });
 
+<<<<<<< HEAD
             builder.Services.AddSingleton<BlobStorageService>(provider =>
             {
                 // Create a new BlobServiceClient using the storage connection string
                 var blobServiceClient = new BlobServiceClient("DefaultEndpointsProtocol=https;AccountName=andbstorage;AccountKey=bl94CUeTr0DKkz10DJHhi8tBntLffgFqBbV+v7e6C2Wd2xNZZMy2TSdnpMU44iAn/bZsjf+N5X6c+AStVLCT1w==;EndpointSuffix=core.windows.net");
+=======
+
+            builder.Services.AddSingleton<BlobStorageService>(provider =>
+            {
+                // Create a new BlobServiceClient using the storage connection string
+                var blobServiceClient = new BlobServiceClient(storageConnectionString);
+>>>>>>> master
 
                 // Specify the container name for storing blobs
                 var containerName = "andbstorage"; // Replace with your container name
 
                 // Create and return an instance of the BlobStorageService, providing the BlobServiceClient and container name
+<<<<<<< HEAD
                 var blobStorageService = new BlobStorageService(blobServiceClient, containerName);
 
                 // Log the BlobStorageService creation
@@ -101,6 +127,16 @@ namespace animeNewsProject
                 return blobStorageService;
             });
 
+=======
+                return new BlobStorageService(blobServiceClient, containerName);
+            });
+
+
+
+
+
+
+>>>>>>> master
             // Add scoped services
             builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 
@@ -131,7 +167,10 @@ namespace animeNewsProject
             // Enable routing
             app.UseRouting();
 
+<<<<<<< HEAD
             app.UseStatusCodePagesWithReExecute("/AccessDenied");
+=======
+>>>>>>> master
             app.UseAuthentication();
             // Enable authorization
             app.UseAuthorization();
@@ -140,9 +179,12 @@ namespace animeNewsProject
             app.MapRazorPages();
             app.MapControllers();
 
+<<<<<<< HEAD
             // Log the application startup completion
             logger.LogInformation("Application startup completed.");
 
+=======
+>>>>>>> master
             // Start the application
             app.Run();
         }
