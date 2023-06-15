@@ -43,11 +43,6 @@ namespace animeNewsProject
             var storageConnectionString = configuration["STORAGE_CONNECTION_STRING"];
             var mongodbConnectionString = configuration["MONGODB_CONNECTION_STRING"];
 
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> master
             // Create a new web application builder
             var builder = WebApplication.CreateBuilder(args);
 
@@ -104,8 +99,6 @@ namespace animeNewsProject
 
                 return blobStorageService;
             });
-
->>>>>>> master
             // Add scoped services
             builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 
@@ -148,8 +141,6 @@ namespace animeNewsProject
             // Log the application startup completion
             logger.LogInformation("Application startup completed.");
 
-=======
->>>>>>> master
             // Start the application
             app.Run();
         }

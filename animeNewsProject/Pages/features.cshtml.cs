@@ -5,9 +5,6 @@ namespace animeNewsProject.Pages
 {
     public class FeaturesModel : PageModel
     {
-<<<<<<< HEAD
-
-=======
         private readonly BlobStorageService _blobStorageService;
 
         public FeaturesModel(BlobStorageService blobStorageService)
@@ -28,6 +25,5 @@ namespace animeNewsProject.Pages
 
             return Page();
         }
->>>>>>> master
-    }
+}
 }

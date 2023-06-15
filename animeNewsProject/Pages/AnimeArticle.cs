@@ -13,8 +13,6 @@ namespace animeNewsProject.Pages
 
         [BsonElement("id")]
         public int Id { get; set; }
-        [BsonElement("image")]
-        public string? Image { get; set; } // Add the image field
 
         [BsonElement("title")]
         public string? Title { get; set; }

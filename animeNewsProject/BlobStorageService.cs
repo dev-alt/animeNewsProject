@@ -30,11 +30,7 @@ public class BlobStorageService
     }
 
     public BlobStorageService(BlobServiceClient blobServiceClient, string containerName)
-<<<<<<< HEAD
     {
-=======
-    { 
->>>>>>> master
         _blobServiceClient = blobServiceClient;
         _containerName = containerName;
     }
