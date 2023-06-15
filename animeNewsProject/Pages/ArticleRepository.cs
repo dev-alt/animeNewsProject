@@ -18,7 +18,7 @@ namespace animeNewsProject
         {
             var articles = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
             var article = articles.FirstOrDefault(a => a.DocumentId == id);
-            return await Task.FromResult(article);
+            return await Task.FromResult(article!);
         }
 
         public Task DeleteArticleByIdAsync(string id)

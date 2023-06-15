@@ -25,5 +25,5 @@ namespace animeNewsProject.Pages
 
             return Page();
         }
-    }
+}
 }

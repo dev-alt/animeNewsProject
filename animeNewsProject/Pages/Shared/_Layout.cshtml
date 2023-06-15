@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -98,7 +99,6 @@
                                             <a class="nav-link" href="/podcasts">PODCASTS</a>
                                         </li>
                                     </ul>
-
                                 </nav>
                             </div>
                         </div>
@@ -113,16 +113,43 @@
                                     <div class="user-icon icon-missing"></div>
                                 </div>
                             </div>
-                            <div class="header-icon expanded-menu-button">
+                            <div id="expanded-menu-button" class="header-icon expanded-menu-button">
                                 <div class="icon-expanded"></div>
                             </div>
                         </div>
                     </div>
                 </header>
+                <div class="hamburger-menu">
+                    <div class="nav-menu">
+                        <ul class="menu">
+                            <!-- Menu items -->
+                            <li class="menu-item">
+                                <a class="nav-link" href="/">HOME</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/">NEWS</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/reviews">REVIEWS</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/features">FEATURES</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/interviews">INTERVIEWS</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/videos">VIDEOS</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="nav-link" href="/podcasts">PODCASTS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <main role="main">
-                
                 <div class="custom-navbar">
                     <ul class="custom-navbar-list">
                         <li class="custom-navbar-item">
@@ -142,9 +169,6 @@
                         </li>
                     </ul>
                 </div>
-
-
-
 
                 <!-- Render the page body content -->
                 @RenderBody()
@@ -200,7 +224,7 @@
             <!-- Include custom JavaScript file -->
             <script src="~/js/site.js" asp-append-version="true"></script>
 
-            <!-- Render optional section for additional scripts -->
+        <!-- Render optional section for additional scripts -->
             @await RenderSectionAsync("Scripts", required: false)
         </div>
     </div>

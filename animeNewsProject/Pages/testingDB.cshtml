@@ -1,41 +1,60 @@
 ﻿@page
 @model animeNewsProject.Pages.TestingDbModel
 
-<h1>Test Azure Blob Storage</h1>
+<h1>Mongo test</h1>
 
-<p>Is MongoDB Connected: @Model.IsMongoDbConnected</p>
-<p>MongoDB Connection String: @Model.MongoDbConnectionString</p>
-<p>Blob Storage Connection String: @Model.BlobStorageConnectionString</p>
-
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Connection Status</h2>
+                    <p>Is MongoDB Connected: @Model.IsMongoDbConnected</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>MongoDB Connection String</h2>
+                    @if (!string.IsNullOrEmpty(Model.MongoDbConnectionString))
+                    {
+                        <table class="table">
+                            <tbody>
+                                @foreach (var item in Model.ParseConnectionString(Model.MongoDbConnectionString))
+                                {
+                                    <tr>
+                                        <th>@item.Key</th>
+                                        <td>@item.Value</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @if (Model.DatabaseNames.Any())
 {
-    <h2>Database Names:</h2>
-    <ul>
-        @foreach (var dbName in Model.DatabaseNames)
-        {
-            <li>@dbName</li>
-        }
-    </ul>
+    <div class="container">
+        <h2>Database Names:</h2>
+        <div class="row">
+            <div class="col">
+                <ul>
+                    @foreach (var dbName in Model.DatabaseNames)
+                    {
+                        <li>@dbName</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
 }
 else
 {
     <p>No databases found.</p>
 }
 
-<h2>Azure Blob Storage Test:</h2>
-<p>Upload and download a file:</p>
-<form method="post" enctype="multipart/form-data" asp-page-handler="TestBlobStorage">
-    <div class="form-group">
-        <label for="file">Select File:</label>
-        <input type="file" id="file" name="file" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Upload and Download</button>
-    </div>
-</form>
-
-@if (!string.IsNullOrEmpty(Model.BlobStorageResult))
-{
-    <p>Result: @Model.BlobStorageResult</p>
-}

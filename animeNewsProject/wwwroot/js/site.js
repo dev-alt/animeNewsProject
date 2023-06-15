@@ -2,3 +2,20 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+//$(document).ready(function () {
+//    $('#expanded-menu-button').click(function () {
+//        $('.expanded-menu-button').toggleClass('close');
+//    });
+//});
+
+$(document).ready(function () {
+    var menuOpen = false;
+    $('#expanded-menu-button').click(function () {
+        if (menuOpen) {
+            $('.hamburger-menu').css('right', '-400px');
+        } else {
+            $('.hamburger-menu').css('right', '0');
+        }
+        menuOpen = !menuOpen;
+    });
+});
