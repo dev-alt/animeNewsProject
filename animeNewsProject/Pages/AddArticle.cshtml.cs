@@ -4,20 +4,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace animeNewsProject.Pages
 {
+    [Authorize]
     public class AddArticleModel : PageModel
     {
 
         private readonly MongoDbService _mongoDbService;
         private readonly BlobStorageService _blobStorageService;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AddArticleModel"/> class.
-        /// </summary>
-        /// <param name="mongoDbService">The MongoDB service.</param>
-        /// <param name="blobStorageService">The Blob Storage service.</param>
+
+        [BindProperty]
+        public Entry Article { get; set; }
+
+
         public AddArticleModel(MongoDbService mongoDbService, BlobStorageService blobStorageService)
         {
             _mongoDbService = mongoDbService;
@@ -27,23 +29,13 @@ namespace animeNewsProject.Pages
             Article = new Entry();
         }
 
-        [BindProperty]
-        public Entry Article { get; set; }
 
-        /// <summary>
-        /// Handles the HTTP POST request to add a new article.
-        /// </summary>
-        /// <param name="imageFile">The uploaded image file.</param>
-        /// <returns>The result of the operation.</returns>
+
         public async Task<IActionResult> OnPost(IFormFile imageFile)
         {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToPage("Index");
-            }
-
             try
             {
+                // Check if an image file is provided
                 if (imageFile != null && imageFile.Length > 0)
                 {
                     // Set the maximum allowed file size (in bytes)
@@ -86,6 +78,11 @@ namespace animeNewsProject.Pages
                     // Set the Image property of the Article object to the blob URL
                     Article.Image = "https://andbstorage.blob.core.windows.net/andbstorage/" + uniqueFileName;
                 }
+
+                Article.Rating = 0;
+
+                // Set the DatePublished property to the current time
+                Article.DatePublished = DateTime.Now;
 
                 // Add the Article entry to the database using the MongoDB service
                 var collectionName = "articles";
