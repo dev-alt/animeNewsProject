@@ -11,16 +11,21 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using Microsoft.Identity.Web;
-using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Identity.Web.UI;
 
-
 namespace animeNewsProject
 {
+    /// <summary>
+    /// The main entry point class for the application.
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// The main method that starts the application.
+        /// </summary>
+        /// <param name="args">Command-line arguments.</param>
         public static void Main(string[] args)
         {
             // Create a logger instance
@@ -31,10 +36,7 @@ namespace animeNewsProject
             }).CreateLogger<Program>();
 
             // Log the application startup
-            logger.LogInformation("Application started.");
-
-
-            DotNetEnv.Env.TraversePath().Load();
+            logger.LogInformation("Application started. :)");
 
             var configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
@@ -62,7 +64,6 @@ namespace animeNewsProject
                     return Task.CompletedTask;
                 };
             });
-
 
             builder.Services.AddSingleton<MongoDbService>(provider =>
             {
@@ -99,9 +100,9 @@ namespace animeNewsProject
 
                 return blobStorageService;
             });
+            
             // Add scoped services
             builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
-
 
             // Add support for Razor Pages
             builder.Services.AddRazorPages();
@@ -128,9 +129,10 @@ namespace animeNewsProject
 
             // Enable routing
             app.UseRouting();
-            
+
             app.UseStatusCodePagesWithReExecute("/AccessDenied");
             app.UseAuthentication();
+
             // Enable authorization
             app.UseAuthorization();
 
