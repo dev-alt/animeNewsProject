@@ -26,11 +26,17 @@ namespace animeNewsProject.Pages
         [BsonElement("rating")]
         public double Rating { get; set; }
 
+        [BsonElement("author_name")]
+        public string? AuthorName { get; set; }
+
         [BsonElement("author_id")]
         public int? AuthorId { get; set; }
 
         [BsonElement("source_id")]
         public int? SourceId { get; set; }
+
+        [BsonElement("SourceLink")]
+        public string? SourceLink { get; set; }
 
         [BsonElement("category")]
         public string? Category { get; set; }
@@ -39,6 +45,6 @@ namespace animeNewsProject.Pages
         public int Views { get; set; }
 
         [BsonElement("image")]
-        public string? Image { get; set; } // Add the image field
+        public string? Image { get; set; }
     }
 }

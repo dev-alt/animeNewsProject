@@ -5,22 +5,20 @@ namespace animeNewsProject.Pages
 {
     public class ArticlesModel : PageModel
     {
+
         [BindProperty(SupportsGet = true)]
         public string? Search { get; set; }
-
         public List<AnimeArticle>? SearchResults { get; set; }
 
         // Pagination properties
         [BindProperty(SupportsGet = true)]
         public int CurrentPage { get; set; } = 1;
-
         public int ArticlesPerPage { get; set; } = 32; // Adjust the number of articles per page
-
         public int TotalPages { get; set; }
         public int TotalArticleCount { get; set; } // Property to hold the total count
-
         private readonly ILogger<ArticlesModel> _logger;
         private readonly MongoDbService _mongoDbService;
+
 
         public ArticlesModel(ILogger<ArticlesModel> logger, MongoDbService mongoDbService)
         {

@@ -4,13 +4,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace animeNewsProject.Pages
 {
+    [Authorize]
     public class AddArticleModel : PageModel
     {
+
         private readonly MongoDbService _mongoDbService;
         private readonly BlobStorageService _blobStorageService;
+
+
+        [BindProperty]
+        public Entry Article { get; set; }
+
 
         public AddArticleModel(MongoDbService mongoDbService, BlobStorageService blobStorageService)
         {
@@ -21,21 +29,15 @@ namespace animeNewsProject.Pages
             Article = new Entry();
         }
 
-        [BindProperty]
-        public Entry Article { get; set; }
+
 
         public async Task<IActionResult> OnPost(IFormFile imageFile)
         {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToPage("Index");
-            }
-
             try
             {
+                // Check if an image file is provided
                 if (imageFile != null && imageFile.Length > 0)
                 {
-
                     // Set the maximum allowed file size (in bytes)
                     var maxFileSize = 2 * 1024 * 1024; // 2 MB
 
@@ -56,13 +58,10 @@ namespace animeNewsProject.Pages
                         return Page();
                     }
 
-
                     if (!Directory.Exists(imageDirectory))
                     {
                         Directory.CreateDirectory(imageDirectory);
                     }
-
-
 
                     // Save the image file to a temporary location on the server
                     using (var fileStream = new FileStream(imagePath, FileMode.Create))
@@ -78,8 +77,12 @@ namespace animeNewsProject.Pages
 
                     // Set the Image property of the Article object to the blob URL
                     Article.Image = "https://andbstorage.blob.core.windows.net/andbstorage/" + uniqueFileName;
-
                 }
+
+                Article.Rating = 0;
+
+                // Set the DatePublished property to the current time
+                Article.DatePublished = DateTime.Now;
 
                 // Add the Article entry to the database using the MongoDB service
                 var collectionName = "articles";

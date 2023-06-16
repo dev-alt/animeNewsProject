@@ -8,11 +8,15 @@ namespace animeNewsProject.Pages
     [IgnoreAntiforgeryToken]
     public class ErrorModel : PageModel
     {
+
         public string? RequestId { get; set; }
+
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
         private readonly ILogger<ErrorModel> _logger;
+
+
 
         public ErrorModel(ILogger<ErrorModel> logger)
         {
@@ -22,6 +26,7 @@ namespace animeNewsProject.Pages
         public void OnGet()
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            _logger.LogInformation("Error page requested. Request ID: {RequestId}", RequestId);
         }
     }
 }

@@ -19,47 +19,33 @@
             <textarea id="text" name="text" rows="4" class="form-control" required></textarea>
         </div>
         
-@*        <!-- Image -->
+       <!-- Image -->
         <div class="form-group">
             <label for="image" class="form-label">Image:</label>
             <input type="file" id="image" name="imageFile" class="form-control">
-        </div>*@
-
-        <!-- Date Published -->
-        <div class="form-group">
-            <label for="date_published" class="form-label">Date Published:</label>
-            <input type="date" id="date_published" name="date_published" class="form-control" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
         </div>
 
-        <!-- Rating -->
+        <!-- Author Name -->
         <div class="form-group">
-            <label for="rating" class="form-label">Rating:</label>
-            <input type="number" id="rating" name="rating" step="0.1" class="form-control" required>
+            <label for="authorName" class="form-label">Author Name:</label>
+            <input type="text" id="authorName" name="authorName" class="form-control" required>
         </div>
 
-        <!-- Author ID -->
-        <div class="form-group">
-            <label for="author_id" class="form-label">Author ID:</label>
-            <input type="number" id="author_id" name="authorId" class="form-control">
-        </div>
 
         <!-- Source ID -->
         <div class="form-group">
-            <label for="source_id" class="form-label">Source ID:</label>
-            <input type="number" id="source_id" name="sourceId" class="form-control">
+            <label for="source_link" class="form-label">Source Link:</label>
+            <input type="text" id="source_link" name="SourceLink" class="form-control">
         </div>
+
 
         <!-- Category -->
-        <div class="form-group">
-            <label for="category" class="form-label">Category:</label>
-            <input type="text" id="category" name="category" class="form-control" required>
-        </div>
+        <input type="radio" name="category" id="anime" value="Anime">
+        <label for="anime">Anime</label>
 
-        <!-- Views -->
-        <div class="form-group">
-            <label for="views" class="form-label">Views:</label>
-            <input type="number" id="views" name="views" class="form-control" required>
-        </div>
+        <input type="radio" name="category" id="manga" value="Manga">
+        <label for="manga">Manga</label>
+
 
         <!-- Submit Button -->
         <div class="form-group article-actions">
