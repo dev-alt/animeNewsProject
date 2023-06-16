@@ -9,9 +9,15 @@ namespace animeNewsProject.Pages
 {
     public class AddArticleModel : PageModel
     {
+
         private readonly MongoDbService _mongoDbService;
         private readonly BlobStorageService _blobStorageService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddArticleModel"/> class.
+        /// </summary>
+        /// <param name="mongoDbService">The MongoDB service.</param>
+        /// <param name="blobStorageService">The Blob Storage service.</param>
         public AddArticleModel(MongoDbService mongoDbService, BlobStorageService blobStorageService)
         {
             _mongoDbService = mongoDbService;
@@ -24,6 +30,11 @@ namespace animeNewsProject.Pages
         [BindProperty]
         public Entry Article { get; set; }
 
+        /// <summary>
+        /// Handles the HTTP POST request to add a new article.
+        /// </summary>
+        /// <param name="imageFile">The uploaded image file.</param>
+        /// <returns>The result of the operation.</returns>
         public async Task<IActionResult> OnPost(IFormFile imageFile)
         {
             if (!ModelState.IsValid)
@@ -35,7 +46,6 @@ namespace animeNewsProject.Pages
             {
                 if (imageFile != null && imageFile.Length > 0)
                 {
-
                     // Set the maximum allowed file size (in bytes)
                     var maxFileSize = 2 * 1024 * 1024; // 2 MB
 
@@ -56,13 +66,10 @@ namespace animeNewsProject.Pages
                         return Page();
                     }
 
-
                     if (!Directory.Exists(imageDirectory))
                     {
                         Directory.CreateDirectory(imageDirectory);
                     }
-
-
 
                     // Save the image file to a temporary location on the server
                     using (var fileStream = new FileStream(imagePath, FileMode.Create))
@@ -78,7 +85,6 @@ namespace animeNewsProject.Pages
 
                     // Set the Image property of the Article object to the blob URL
                     Article.Image = "https://andbstorage.blob.core.windows.net/andbstorage/" + uniqueFileName;
-
                 }
 
                 // Add the Article entry to the database using the MongoDB service

@@ -4,9 +4,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace animeNewsProject.Pages
 {
+    /// <summary>
+    /// Page model for the login page.
+    /// </summary>
     [Authorize]
     public class LoginModel : PageModel
     {
+        /// <summary>
+        /// Handles the POST request for user login.
+        /// </summary>
+        /// <param name="username">The username provided by the user.</param>
+        /// <param name="password">The password provided by the user.</param>
+        /// <returns>The action result based on the login result.</returns>
         public IActionResult OnPost(string username, string password)
         {
             // Perform user authentication and validation logic
@@ -25,9 +34,14 @@ namespace animeNewsProject.Pages
             }
         }
 
+        /// <summary>
+        /// Validates the user credentials.
+        /// </summary>
+        /// <param name="username">The username to validate.</param>
+        /// <param name="password">The password to validate.</param>
+        /// <returns>True if the user is valid, false otherwise.</returns>
         private static bool IsValidUser(string username, string password)
         {
-
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 return false;
