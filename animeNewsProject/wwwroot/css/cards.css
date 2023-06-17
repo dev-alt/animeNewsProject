@@ -56,15 +56,6 @@
     margin-bottom: 15px;
 }
 
-
-.card-image {
-    max-width: 100%;
-    max-height: 200px; /* Adjust the desired maximum height */
-    object-fit: cover;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
 .card-link {
     color: #007bff;
     text-decoration: none;
