@@ -62,6 +62,9 @@ namespace animeNewsProject.Pages
                     Article.Image = "https://andbstorage.blob.core.windows.net/andbstorage/" + uniqueFileName;// Set the Image property of the Article object to the blob URL
                 }
 
+                // Set the additional fields
+                Article.Summary = Article.Text.Substring(0, Math.Min(Article.Text.Length, 100)); // Set a summary based on the article text
+                Article.Tags = ExtractTagsFromText(Article.Text); // Extract tags from the article text
                 Article.Rating = 0;
                 Article.DatePublished = DateTime.Now; // Set the DatePublished property to the current time
                 var collectionName = "articles"; // Add the Article entry to the database using the MongoDB service
@@ -77,5 +80,43 @@ namespace animeNewsProject.Pages
                 return Page(); // Return the page with the error message
             }
         }
+        // Extract tags from the article text
+        private string[] ExtractTagsFromText(string text)
+        {
+            // Define a HashSet to store the extracted tags (to avoid duplicates)
+            HashSet<string> tags = new HashSet<string>();
+
+            // List of predefined tags
+            string[] predefinedTags = {
+                "Anime", "Manga", "Adaptation", "Season", "Episode", "Film", "Series", "Premiere", "Release",
+                "Streaming", "Crunchyroll", "Funimation", "Netflix", "Character", "Studio", "Genre", "Fantasy",
+                "Action", "Romance", "Comedy", "Slice of Life", "Supernatural", "Adventure", "Sci-Fi", "School",
+                "Drama", "Shounen", "Shoujo", "Seinen", "Magical Girl", "Mecha", "Sports", "Music", "Gaming",
+                "Otaku", "Cosplay", "Voice Acting", "Fanbase", "Merchandise", "Convention", "Opening Theme",
+                "Ending Theme", "OST (Original Soundtrack)", "VA (Voice Actor)", "Dubbed", "Subbed", "Simulcast",
+                "Blu-ray", "DVD", "Collectibles"
+            };
+
+            // Split the text into words using whitespace and punctuation as delimiters
+            string[] words = text.Split(new[] { ' ', ',', '.', ';', ':', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Iterate through the words
+            foreach (string word in words)
+            {
+                // Remove leading and trailing whitespace from the word
+                string trimmedWord = word.Trim();
+
+                // Check if the word is not empty and exists in the predefined tags list
+                if (!string.IsNullOrEmpty(trimmedWord) && predefinedTags.Contains(trimmedWord))
+                {
+                    // Add the word to the HashSet of tags
+                    tags.Add(trimmedWord);
+                }
+            }
+
+            // Return the tags as an array
+            return tags.ToArray();
+        }
+
     }
 }
