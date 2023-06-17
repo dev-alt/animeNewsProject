@@ -7,6 +7,7 @@
 
 <div class="edit-article-container">
     <form method="post" enctype="multipart/form-data">
+
         <!-- Title -->
         <div class="form-group">
             <label for="title" class="form-label">Title:</label>
@@ -18,8 +19,8 @@
             <label for="text" class="form-label">Text:</label>
             <textarea id="text" name="text" rows="4" class="form-control" required></textarea>
         </div>
-        
-       <!-- Image -->
+
+        <!-- Image -->
         <div class="form-group">
             <label for="image" class="form-label">Image:</label>
             <input type="file" id="image" name="imageFile" class="form-control">
@@ -32,7 +33,7 @@
         </div>
 
 
-        <!-- Source ID -->
+        <!-- Source Link -->
         <div class="form-group">
             <label for="source_link" class="form-label">Source Link:</label>
             <input type="text" id="source_link" name="SourceLink" class="form-control">
@@ -51,5 +52,6 @@
         <div class="form-group article-actions">
             <button type="submit" class="btn btn-primary">Add Entry</button>
         </div>
+
     </form>
 </div>

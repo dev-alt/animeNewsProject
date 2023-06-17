@@ -16,15 +16,8 @@ using Microsoft.Identity.Web.UI;
 
 namespace animeNewsProject
 {
-    /// <summary>
-    /// The main entry point class for the application.
-    /// </summary>
     public class Program
     {
-        /// <summary>
-        /// The main method that starts the application.
-        /// </summary>
-        /// <param name="args">Command-line arguments.</param>
         public static void Main(string[] args)
         {
             var logger = LoggerFactory.Create(builder =>

@@ -11,9 +11,6 @@ namespace animeNewsProject.Pages
         [BsonElement("_id")]
         public string? DocumentId { get; set; }
 
-        [BsonElement("id")]
-        public int Id { get; set; }
-
         [BsonElement("title")]
         public string? Title { get; set; }
 
