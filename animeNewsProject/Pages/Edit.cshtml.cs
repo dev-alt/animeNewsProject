@@ -1,12 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace animeNewsProject.Pages
 {
+    [Authorize]
     public class EditModel : PageModel
     {
-
         private readonly IArticleRepository _articleRepository;
+
 
         [BindProperty]
         public AnimeArticle UpdatedArticle { get; set; }
@@ -17,6 +19,7 @@ namespace animeNewsProject.Pages
             _articleRepository = articleRepository;
             UpdatedArticle = new AnimeArticle(); // Initialize the UpdatedArticle property with a non-null value
         }
+
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -29,6 +32,7 @@ namespace animeNewsProject.Pages
 
             return Page();
         }
+
 
         public async Task<IActionResult> OnPostAsync()
         {

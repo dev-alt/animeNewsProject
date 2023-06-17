@@ -1,19 +1,6 @@
 ﻿@page
 @model animeNewsProject.Pages.NewsModel
 
-<style>
-    /* CSS styles */
-
-    .article-image {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 20px;
-    }
-
-    /* Rest of the CSS styles */
-
-</style>
-
 <p></p>
 <p></p>
 <p></p>
@@ -39,11 +26,18 @@
             <p>Rating: @Model.Article.Rating</p>
             <p>Views: @Model.Article.Views</p>
         </div>
+
         <div class="article-actions">
             <div class="button-container">
                 <a href="~/edit?id=@Model.Article.DocumentId" class="button button-primary">Edit</a>
                 <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Article.DocumentId">
                     <button type="submit" class="button button-danger">Delete</button>
+                </form>
+
+                <!-- Add rating button -->
+                <form method="post" asp-page-handler="Rate" class="rating-button">
+                    <input type="hidden" name="id" value="@Model.Article.DocumentId" />
+                    <button type="submit" class="button button-primary">Rate</button>
                 </form>
             </div>
         </div>

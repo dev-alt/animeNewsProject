@@ -1,6 +1,5 @@
 using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -11,11 +10,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using Microsoft.Identity.Web;
-using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Identity.Web.UI;
-
 
 namespace animeNewsProject
 {
@@ -23,18 +20,13 @@ namespace animeNewsProject
     {
         public static void Main(string[] args)
         {
-            // Create a logger instance
             var logger = LoggerFactory.Create(builder =>
             {
                 builder.AddConsole();
                 builder.AddDebug();
             }).CreateLogger<Program>();
 
-            // Log the application startup
-            logger.LogInformation("Application started.");
-
-
-            DotNetEnv.Env.TraversePath().Load();
+            logger.LogInformation("Application started. :)");
 
             var configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
@@ -43,26 +35,12 @@ namespace animeNewsProject
             var storageConnectionString = configuration["STORAGE_CONNECTION_STRING"];
             var mongodbConnectionString = configuration["MONGODB_CONNECTION_STRING"];
 
-            // Create a new web application builder
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddAuthentication(options => configuration.Bind("AzureAd", options))
                 .AddMicrosoftIdentityWebApi(builder.Configuration, "AzureAd")
                 .EnableTokenAcquisitionToCallDownstreamApi()
                 .AddInMemoryTokenCaches();
-
-            builder.Services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-            {
-                options.Events.OnRedirectToAccessDenied = context =>
-                {
-                    // Set the error message in ViewData
-                    context.HttpContext.Items["AuthFailed"] = "Authentication failed.";
-
-                    context.Response.Redirect(context.RedirectUri);
-                    return Task.CompletedTask;
-                };
-            });
-
 
             builder.Services.AddSingleton<MongoDbService>(provider =>
             {
@@ -99,39 +77,30 @@ namespace animeNewsProject
 
                 return blobStorageService;
             });
-            // Add scoped services
+
+
             builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 
-
-            // Add support for Razor Pages
             builder.Services.AddRazorPages();
 
             // Build the application
             var app = builder.Build();
 
-            // Configure the application
 
-            // If the application is not running in a development environment, configure error handling and enable HTTPS
-            if (!app.Environment.IsDevelopment())
-            {
-                // Log error handling configuration
-                logger.LogInformation("Configuring error handling and enabling HTTPS.");
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
+            //if (!app.Environment.IsDevelopment())  // If the application is not running in a development environment, configure error handling and enable HTTPS
+            //{
+            //    // Log error handling configuration
+            //    logger.LogInformation("Configuring error handling and enabling HTTPS.");
+            //    app.UseExceptionHandler("/Error");
+            //    app.UseHsts();
+            //}
 
-            // Redirect HTTP requests to HTTPS
-            app.UseHttpsRedirection();
-
-            // Serve static files (e.g., CSS, JavaScript, images) from wwwroot folder
+            app.UseHttpsRedirection(); //Redirect HTTP requests to HTTPS
             app.UseStaticFiles();
-
-            // Enable routing
             app.UseRouting();
-            
+
             app.UseStatusCodePagesWithReExecute("/AccessDenied");
             app.UseAuthentication();
-            // Enable authorization
             app.UseAuthorization();
 
             // Map Razor Pages

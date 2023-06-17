@@ -14,6 +14,7 @@ namespace animeNewsProject.Pages
 
         public void OnGet()
         {
+            _logger.LogInformation("Application started.");
         }
     }
 }
