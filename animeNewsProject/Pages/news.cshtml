@@ -4,11 +4,22 @@
 <p></p>
 <p></p>
 <p></p>
+
 <div class="article-box">
     @if (Model.Article != null)
     {
-        <h2 class="article-title">@Model.Article.Title</h2>
+        <h1 class="article-title">@Model.Article.Title</h1>
+        <p class="article-summary">@Model.Article.Summary</p>
 
+        <div class="article-info">
+            <p>Published by @Model.Article.AuthorName on @Model.Article.DatePublished | Comments: 150</p>
+        </div>
+
+        <div class="article-info">
+            <p>Category: @Model.Article.Category | Rating: @Model.Article.Rating | Views: @Model.Article.Views</p>
+        </div>
+
+        <div class="card-image-container">
         <!-- Display the image -->
         @if (!string.IsNullOrEmpty(Model.Article.Image))
         {
@@ -18,14 +29,9 @@
         {
             <img src="/images/default.png" alt="Placeholder Image" class="card-image">
         }
+        </div>
 
         <p class="article-text">@Model.Article.Text</p>
-        <div class="article-info">
-            <p>Category: @Model.Article.Category</p>
-            <p>Date Published: @Model.Article.DatePublished</p>
-            <p>Rating: @Model.Article.Rating</p>
-            <p>Views: @Model.Article.Views</p>
-        </div>
 
         <div class="article-actions">
             <div class="button-container">
