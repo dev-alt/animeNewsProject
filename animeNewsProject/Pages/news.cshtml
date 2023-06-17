@@ -29,9 +29,9 @@
 
         <div class="article-actions">
             <div class="button-container">
-                <a href="~/edit?id=@Model.Article.DocumentId" class="button button-primary">Edit</a>
-                <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Article.DocumentId">
-                    <button type="submit" class="button button-danger">Delete</button>
+                <a href="~/edit?id=@Model.Article.DocumentId" class="button button-edit">Edit</a>
+                <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Article.DocumentId" onsubmit="return confirm('Are you sure you want to delete this article?');">
+                    <button type="submit" class="button button-delete">Delete</button>
                 </form>
 
                 <!-- Add rating button -->
@@ -47,3 +47,27 @@
         <p>Article not found.</p>
     }
 </div>
+<style>
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .button {
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .button-edit {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .button-delete {
+        background-color: #dc3545;
+        color: #fff;
+    }
+</style>
