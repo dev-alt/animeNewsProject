@@ -63,8 +63,12 @@ namespace animeNewsProject.Pages
                 }
 
                 // Set the additional fields
-                Article.Summary = Article.Text.Substring(0, Math.Min(Article.Text.Length, 100)); // Set a summary based on the article text
-                Article.Tags = ExtractTagsFromText(Article.Text); // Extract tags from the article text
+                if (Article.Text != null)
+                {
+                    Article.Summary = Article.Text[..Math.Min(Article.Text.Length, 100)];
+                    Article.Tags = ExtractTagsFromText(Article.Text); // Extract tags from the article text
+                }
+
                 Article.Rating = 0;
                 Article.DatePublished = DateTime.Now; // Set the DatePublished property to the current time
                 var collectionName = "articles"; // Add the Article entry to the database using the MongoDB service
@@ -81,8 +85,13 @@ namespace animeNewsProject.Pages
             }
         }
         // Extract tags from the article text
-        private string[] ExtractTagsFromText(string text)
+        private static string[] ExtractTagsFromText(string text)
         {
+
+            if (text == null)
+            {
+                return new string[0]; // or handle the null case accordingly
+            }
             // Define a HashSet to store the extracted tags (to avoid duplicates)
             HashSet<string> tags = new HashSet<string>();
 

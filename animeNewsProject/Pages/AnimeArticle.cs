@@ -43,5 +43,14 @@ namespace animeNewsProject.Pages
 
         [BsonElement("image")]
         public string? Image { get; set; }
+
+        // Additional properties
+        [BsonIgnoreIfNull]
+        [BsonElement("summary")]
+        public string? Summary { get; set; }
+
+        [BsonIgnoreIfNull]
+        [BsonElement("tags")]
+        public string[]? Tags { get; set; }
     }
 }
