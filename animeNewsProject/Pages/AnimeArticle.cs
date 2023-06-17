@@ -51,6 +51,6 @@ namespace animeNewsProject.Pages
 
         [BsonIgnoreIfNull]
         [BsonElement("tags")]
-        public string[] Tags { get; set; }
+        public string[]? Tags { get; set; }
     }
 }

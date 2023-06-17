@@ -19,7 +19,7 @@
 
     <p></p>
 
-    <div>
+    <div class="article-container">
         <!-- Top articles of the Week -->
         <h2 class="mb-4">Top articles of the Week</h2>
         <div class="card-group">
@@ -56,9 +56,8 @@
         <div class="show-all-articles">
             <a href="/articles" class="btn btn-primary">Show All Articles</a>
         </div>
-    </div>
 
-    <!-- Show latest articles -->
+        <!-- Show latest articles -->
     <h2 class="mb-4">Latest articles released</h2>
     <div class="card-group custom-card-group">
         @foreach (var article in Model.SearchResults?.OrderByDescending(a => a.DatePublished)?.Take(3) ?? new List<AnimeArticle>())
@@ -124,7 +123,7 @@
         }
     </div>
 </div>
-
+</div>
 @functions {
     public string TruncateText(string? text, int maxLength)
     {

@@ -107,7 +107,11 @@
     display: flex;
     width: 100%
 }
-
+.article-container {
+    max-width: 1280px; /* Adjust the maximum width as desired */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add some padding around the container */
+}
 
 
 .custom-navbar {
