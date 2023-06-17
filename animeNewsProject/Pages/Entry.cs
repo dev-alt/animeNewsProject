@@ -5,14 +5,10 @@ namespace animeNewsProject.Pages
 {
     public class Entry
     {
-
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("_id")]
         public string? DocumentId { get; set; }
-
-        [BsonElement("id")]
-        public int Id { get; set; }
 
         [BsonElement("title")]
         public string? Title { get; set; }
@@ -26,21 +22,35 @@ namespace animeNewsProject.Pages
         [BsonElement("rating")]
         public double Rating { get; set; }
 
-        [BsonElement("author_id")]
-        [BsonRepresentation(BsonType.Int32)] // Specify the representation as Int32
-        public int AuthorId { get; set; }
+        [BsonElement("author_name")]
+        public string? AuthorName { get; set; }
+
+        [BsonElement("SourceLink")]
+        public string? SourceLink { get; set; }
 
         [BsonElement("source_id")]
-        [BsonRepresentation(BsonType.Int32)] // Specify the representation as Int32
+        [BsonRepresentation(BsonType.Int32)]
         public int SourceId { get; set; }
 
         [BsonElement("category")]
         public string? Category { get; set; }
 
+        [BsonDefaultValue(0)]
         [BsonElement("views")]
         public int Views { get; set; }
 
+        [BsonIgnoreIfNull]
         [BsonElement("image")]
-        public string? Image { get; set; } // Add the image field
+        public string? Image { get; set; }
+    }
+
+    public class Author
+    {
+        [BsonElement("id")]
+        [BsonRepresentation(BsonType.Int32)]
+        public int Id { get; set; }
+
+        [BsonElement("name")]
+        public string? Name { get; set; }
     }
 }

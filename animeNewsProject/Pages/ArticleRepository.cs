@@ -9,6 +9,7 @@ namespace animeNewsProject
     {
         private readonly MongoDbService _mongoDbService;
 
+
         public ArticleRepository(MongoDbService mongoDbService)
         {
             _mongoDbService = mongoDbService;
@@ -44,17 +45,14 @@ namespace animeNewsProject
             existingArticle.DatePublished = article.DatePublished;
             existingArticle.Rating = article.Rating;
             existingArticle.AuthorId = article.AuthorId;
-            existingArticle.SourceId = article.SourceId;
+            //existingArticle.SourceLink = article.SourceLink;
             existingArticle.Category = article.Category;
             existingArticle.Views = article.Views;
 
             var collection = _mongoDbService.GetCollection<AnimeArticle>("articles");
 
-
             var filter = Builders<AnimeArticle>.Filter.Eq("_id", ObjectId.Parse(existingArticle.DocumentId));
             await collection.ReplaceOneAsync(filter, existingArticle);
         }
-
-
     }
 }
