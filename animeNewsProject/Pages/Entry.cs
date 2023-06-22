@@ -28,10 +28,6 @@ namespace animeNewsProject.Pages
         [BsonElement("SourceLink")]
         public string? SourceLink { get; set; }
 
-        [BsonElement("source_id")]
-        [BsonRepresentation(BsonType.Int32)]
-        public int SourceId { get; set; }
-
         [BsonElement("category")]
         public string? Category { get; set; }
 
@@ -50,7 +46,11 @@ namespace animeNewsProject.Pages
 
         [BsonIgnoreIfNull]
         [BsonElement("tags")]
-        public string[] Tags { get; set; }
+        public string[]? Tags { get; set; }
+
+        [BsonIgnoreIfNull]
+        [BsonElement("comments")]
+        public List<string>? Comments { get; set; }
     }
 
     public class Author

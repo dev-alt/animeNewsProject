@@ -1,7 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
 
 namespace animeNewsProject
 {
@@ -9,7 +7,6 @@ namespace animeNewsProject
     {
         private readonly IMongoClient _client;
         private readonly IMongoDatabase _database;
-
 
         public MongoDbService(IMongoClient client, string databaseName)
         {
@@ -54,7 +51,7 @@ namespace animeNewsProject
             }
             catch (Exception ex)
             {
-                // Handle the exception (e.g., log, throw, or return an empty list)
+
                 Console.WriteLine($"Error occurred while adding entry: {ex.Message}");
                 Console.WriteLine($"Exception stack trace: {ex.StackTrace}");
             }

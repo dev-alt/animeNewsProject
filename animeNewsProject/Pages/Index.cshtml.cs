@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace animeNewsProject.Pages
 {
@@ -14,7 +10,6 @@ namespace animeNewsProject.Pages
 
         [BindProperty(SupportsGet = true)]
         public string? Search { get; set; }
-        public List<AnimeArticle>? SearchResults { get; set; }
         [BindProperty(SupportsGet = true)]
         public int CurrentPage { get; set; } = 1;
         public int ArticlesPerPage { get; set; } = 6;
@@ -22,26 +17,21 @@ namespace animeNewsProject.Pages
         public int TotalArticleCount { get; set; }
         private readonly ILogger<IndexModel> _logger;
         private readonly MongoDbService _mongoDbService;
-
+        public List<AnimeArticle>? FeaturedArticles { get; set; }
+        public List<AnimeArticle> CollectionData { get; private set; }
+        public List<AnimeArticle>? SearchResults { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, MongoDbService mongoDbService)
         {
             _logger = logger;
             _mongoDbService = mongoDbService;
-
-            // Get all documents from the "articles" collection
-            CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
+            CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");            // Get all documents from the "articles" collection
         }
-
-
-        public List<AnimeArticle> CollectionData { get; private set; }
-
 
         public void OnGet()
         {
-            try
+            try     // Get all documents from the "articles" collection
             {
-                // Get all documents from the "articles" collection
                 CollectionData = _mongoDbService.GetAllDocuments<AnimeArticle>("articles");
 
                 if (!string.IsNullOrEmpty(Search))
@@ -51,17 +41,13 @@ namespace animeNewsProject.Pages
                         .Where(r => r.Title != null && r.Title.Contains(Search, StringComparison.OrdinalIgnoreCase))
                         .ToList();
                 }
-                else
+                else // No search query, show all articles
                 {
-                    // No search query, show all articles
                     SearchResults = CollectionData;
                 }
 
-                // Set the total count
-                TotalArticleCount = SearchResults.Count;
-
-                // Apply pagination
-                TotalPages = (int)Math.Ceiling(SearchResults.Count / (double)ArticlesPerPage);
+                TotalArticleCount = SearchResults.Count; // Set the total count
+                TotalPages = (int)Math.Ceiling(SearchResults.Count / (double)ArticlesPerPage); // Apply pagination
 
                 // Validate current page number
                 if (CurrentPage < 1)
@@ -73,19 +59,28 @@ namespace animeNewsProject.Pages
                     CurrentPage = TotalPages;
                 }
 
+
+                // Retrieve the featured articles from the SearchResults list
+                FeaturedArticles = SearchResults
+                    .OrderByDescending(a => a.Views)
+                    .Take(3)
+                    .ToList();
+
+
                 int startIndex = (CurrentPage - 1) * ArticlesPerPage;
                 int endIndex = Math.Min(startIndex + ArticlesPerPage, SearchResults.Count);
+
 
                 // Get the articles for the current page
                 SearchResults = SearchResults
                     .Skip(startIndex)
                     .Take(endIndex - startIndex)
                     .ToList();
+
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while processing the request.");
-                // Handle the error (e.g., show an error message to the user)
             }
         }
     }

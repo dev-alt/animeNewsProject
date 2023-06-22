@@ -1,10 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace animeNewsProject.Pages
+namespace animeNewsProject.Pages.main
 {
     public class FeaturesModel : PageModel
     {
-        
-}
+
+    }
 }

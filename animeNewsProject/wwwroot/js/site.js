@@ -19,3 +19,20 @@ $(document).ready(function () {
         menuOpen = !menuOpen;
     });
 });
+
+$(document).ready(function () {
+    $('.carousel-item:first').addClass('active'); // Set the first item as active initially
+
+    // Automatically switch to the next item in the carousel every 5 seconds
+    setInterval(function () {
+        var $activeItem = $('.carousel-item.active');
+        var $nextItem = $activeItem.next('.carousel-item');
+
+        if ($nextItem.length === 0) {
+            $nextItem = $('.carousel-item:first');
+        }
+
+        $activeItem.removeClass('active');
+        $nextItem.addClass('active');
+    }, 5000);
+});

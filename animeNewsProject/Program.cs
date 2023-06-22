@@ -1,18 +1,7 @@
+using animeNewsProject.Pages;
 using Azure.Storage.Blobs;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using MongoDB.Driver;
 using Microsoft.Identity.Web;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.Identity.Web.UI;
+using MongoDB.Driver;
 
 namespace animeNewsProject
 {
@@ -30,29 +19,25 @@ namespace animeNewsProject
 
             var configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
+                .AddJsonFile("appsettings.json")
                 .Build();
 
-            var storageConnectionString = configuration["STORAGE_CONNECTION_STRING"];
-            var mongodbConnectionString = configuration["MONGODB_CONNECTION_STRING"];
+
+            var mongoDbConnectionString = configuration.GetConnectionString("MongoDbConnectionString");
+            var blobStorageConnectionString = configuration.GetConnectionString("BlobStorageConnectionString");
+
+
 
             var builder = WebApplication.CreateBuilder(args);
-
-            builder.Services.AddAuthentication(options => configuration.Bind("AzureAd", options))
-                .AddMicrosoftIdentityWebApi(builder.Configuration, "AzureAd")
-                .EnableTokenAcquisitionToCallDownstreamApi()
-                .AddInMemoryTokenCaches();
 
             builder.Services.AddSingleton<MongoDbService>(provider =>
             {
                 // Create a new MongoDB client with the connection string
-                var client = new MongoClient("mongodb+srv://9957173:mongodb@cluster0.3xvibw0.mongodb.net/?retryWrites=true&w=majority");
-
+                var client = new MongoClient(mongoDbConnectionString);
                 // Specify the database name
                 var databaseName = "anime_news_project";
-
                 // Create and return an instance of the MongoDbService, providing the client and database name
                 var mongoDbService = new MongoDbService(client, databaseName);
-
                 // Log the MongoDB service creation
                 var logger = provider.GetRequiredService<ILogger<MongoDbService>>();
                 logger.LogInformation("MongoDbService instance created.");
@@ -63,7 +48,7 @@ namespace animeNewsProject
             builder.Services.AddSingleton<BlobStorageService>(provider =>
             {
                 // Create a new BlobServiceClient using the storage connection string
-                var blobServiceClient = new BlobServiceClient("DefaultEndpointsProtocol=https;AccountName=andbstorage;AccountKey=bl94CUeTr0DKkz10DJHhi8tBntLffgFqBbV+v7e6C2Wd2xNZZMy2TSdnpMU44iAn/bZsjf+N5X6c+AStVLCT1w==;EndpointSuffix=core.windows.net");
+                var blobServiceClient = new BlobServiceClient(blobStorageConnectionString);
 
                 // Specify the container name for storing blobs
                 var containerName = "andbstorage"; // Replace with your container name
@@ -87,13 +72,13 @@ namespace animeNewsProject
             var app = builder.Build();
 
 
-            //if (!app.Environment.IsDevelopment())  // If the application is not running in a development environment, configure error handling and enable HTTPS
-            //{
-            //    // Log error handling configuration
-            //    logger.LogInformation("Configuring error handling and enabling HTTPS.");
-            //    app.UseExceptionHandler("/Error");
-            //    app.UseHsts();
-            //}
+            if (!app.Environment.IsDevelopment())  // If the application is not running in a development environment, configure error handling and enable HTTPS
+            {
+                // Log error handling configuration
+                logger.LogInformation("Configuring error handling and enabling HTTPS.");
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection(); //Redirect HTTP requests to HTTPS
             app.UseStaticFiles();

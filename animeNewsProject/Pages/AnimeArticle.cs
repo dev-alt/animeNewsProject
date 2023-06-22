@@ -1,11 +1,17 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace animeNewsProject.Pages
 {
     public class AnimeArticle
     {
+
+        // Initialize the Comments property in the constructor
+        public AnimeArticle()
+        {
+            Comments = new List<string>();
+        }
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("_id")]
@@ -26,12 +32,6 @@ namespace animeNewsProject.Pages
         [BsonElement("author_name")]
         public string? AuthorName { get; set; }
 
-        [BsonElement("author_id")]
-        public int? AuthorId { get; set; }
-
-        [BsonElement("source_id")]
-        public int? SourceId { get; set; }
-
         [BsonElement("SourceLink")]
         public string? SourceLink { get; set; }
 
@@ -43,5 +43,18 @@ namespace animeNewsProject.Pages
 
         [BsonElement("image")]
         public string? Image { get; set; }
+
+        // Additional properties
+        [BsonIgnoreIfNull]
+        [BsonElement("summary")]
+        public string? Summary { get; set; }
+
+        [BsonIgnoreIfNull]
+        [BsonElement("tags")]
+        public string[]? Tags { get; set; }
+
+        [BsonIgnoreIfNull]
+        [BsonElement("comments")]
+        public List<string> Comments { get; set; }
     }
 }
