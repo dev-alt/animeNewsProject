@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace animeNewsProject.Pages
+namespace animeNewsProject.Pages.main
 {
     public class PrivacyModel : PageModel
     {
