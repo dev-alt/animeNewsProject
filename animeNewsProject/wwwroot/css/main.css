@@ -107,7 +107,11 @@
     display: flex;
     width: 100%
 }
-
+.article-container {
+    max-width: 1280px; /* Adjust the maximum width as desired */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add some padding around the container */
+}
 
 
 .custom-navbar {
@@ -162,19 +166,27 @@
     text-align: center;
     margin-bottom: 20px;
 }
-
+@media (min-width:1024px) {
+    .article-box {
+        width: 50%
+    }
+}
 .article-box {
     border: 1px solid #ccc;
     padding: 20px;
     margin-bottom: 20px;
-    width: 30%;
     margin-left: auto;
     margin-right: auto;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.article-image {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
+
+card-image-container .card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
 }
 
 .rating-button {
@@ -191,42 +203,48 @@
 
 .article-info {
     margin-bottom: 10px;
+    color: #777;
 }
 
 .article-text {
     font-size: 16px;
     line-height: 1.5;
+    color: #333;
 }
 
 .article-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin-top: 20px;
 }
 
-.article-actions button {
-    padding: 8px 16px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+    .article-actions button {
+        padding: 8px 16px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-.article-actions .btn-primary {
-    background-color: #007bff;
-    color: #fff;
-}
+    .article-actions .button-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
 
-.article-actions .btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-}
+    .article-actions .button-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
 
-.article-actions .btn-primary:hover,
-.article-actions .btn-danger:hover {
-    opacity: 0.8;
-}
+        .article-actions .button-primary:hover,
+        .article-actions .button-danger:hover {
+            opacity: 0.8;
+        }
+
+
+
 .edit-article-container {
     border: 1px solid #ccc;
     padding: 20px;
@@ -309,4 +327,98 @@
 .layout-container .show-all-articles a:active,
 .layout-container .show-all-articles a:hover {
     color: #79a2ee;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.carousel-item {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(0.7);
+    transition: transform 0.3s;
+}
+
+    .carousel-item.active {
+        display: block;
+        transform: scale(1);
+        z-index: 1;
+    }
+
+    .carousel-item:not(.active) {
+        filter: brightness(70%);
+        z-index: 0;
+    }
+
+    .carousel-item.left,
+    .carousel-item.right {
+        transform: scale(0.7) translateX(15%);
+    }
+
+        .carousel-item.left.active,
+        .carousel-item.right.active {
+            transform: scale(1) translateX(0);
+            z-index: 1;
+        }
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 100%;
+}
+
+.carousel-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carousel-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.carousel-link {
+    color: white;
+    text-decoration: none;
+}
+.c-card .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: fit-content;
+}
+
+@media screen and (max-width: 768px) {
+    .card-set {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .article-card {
+        grid-column: span 1;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card-set {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

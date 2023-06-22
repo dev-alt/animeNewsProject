@@ -13,34 +13,32 @@
     </div>
 </form>
 
-
-
-
-<h1>All Articles</h1>
-
-<div class="card-group">
-    <!-- Add custom class to the card-group container -->
-    <div class="card-group custom-card-group">
-        @foreach (var article in Model.SearchResults!.OrderByDescending(a => a.DatePublished).ToList())
-        {
-            <div class="card">
-                @if (!string.IsNullOrEmpty(article.Image))
-                {
-                    <img src="@article.Image" alt="Article Image" class="card-image">
-                }
-                else
-                {
-                    <img src="/images/default.png" alt="Placeholder Image" class="card-image">
-                }
-                <div class="card-content">
-                    <a href="/news?id=@article.DocumentId" class="card-link">
-                        <h3 class="card-title">@article.Title</h3>
-                    </a>
-                    <p class="card-text">@TruncateText(article.Text, 200)</p>
-                    <a href="/news?id=@article.DocumentId" class="card-link">Read More</a>
+<div class="article-container">
+    <h1>All Articles</h1>
+    <div class="card-group">
+        <!-- Add custom class to the card-group container -->
+        <div class="card-group custom-card-group">
+            @foreach (var article in Model.SearchResults!.OrderByDescending(a => a.DatePublished).ToList())
+            {
+                <div class="card">
+                    @if (!string.IsNullOrEmpty(article.Image))
+                    {
+                        <img src="@article.Image" alt="Article Image" class="card-image">
+                    }
+                    else
+                    {
+                        <img src="/images/default.png" alt="Placeholder Image" class="card-image">
+                    }
+                    <div class="card-content">
+                        <a href="/news?id=@article.DocumentId" class="card-link">
+                            <h3 class="card-title">@article.Title</h3>
+                        </a>
+                        <p class="card-text">@TruncateText(article.Text, 200)</p>
+                        <a href="/news?id=@article.DocumentId" class="card-link">Read More</a>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
 
