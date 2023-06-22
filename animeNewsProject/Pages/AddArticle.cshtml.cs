@@ -61,6 +61,8 @@ namespace animeNewsProject.Pages
                     Article.Tags = ExtractTagsFromText(Article.Text); // Extract tags from the article text
                 }
 
+                Article.Summary = Article.Text.Substring(0, Math.Min(Article.Text.Length, 100)); // Set a summary based on the article text
+                Article.Tags = ExtractTagsFromText(Article.Text); // Extract tags from the article text
                 Article.Rating = 0;
                 Article.DatePublished = DateTime.Now; // Set the DatePublished property to the current time
 
