@@ -1,9 +1,9 @@
 ﻿@page
 @model animeNewsProject.Pages.NewsModel
 
-<p></p>
-<p></p>
-<p></p>
+@{
+    ViewData["Title"] = "News";
+}
 
 <div class="article-box">
     @if (Model.Article != null)
@@ -20,18 +20,50 @@
         </div>
 
         <div class="card-image-container">
-        <!-- Display the image -->
-        @if (!string.IsNullOrEmpty(Model.Article.Image))
-        {
-            <img src="@Model.Article.Image" alt="Article Image" class="card-image">
-        }
-        else
-        {
-            <img src="/images/default.png" alt="Placeholder Image" class="card-image">
-        }
+            <!-- Display the image -->
+            @if (!string.IsNullOrEmpty(Model.Article.Image))
+            {
+                <img src="@Model.Article.Image" alt="Article Image" class="card-image">
+            }
+            else
+            {
+                <img src="/images/default.png" alt="Placeholder Image" class="card-image">
+            }
         </div>
 
         <p class="article-text">@Model.Article.Text</p>
+
+        <h3>Comments</h3>
+        <div id="commentContainer">
+            @if (Model.Article.Comments.Any())
+            {
+                @foreach (var comment in Model.Article.Comments)
+                {
+                    <div class="comment-item">
+                        <span>@comment</span>
+                        <form method="post" asp-page-handler="DeleteComment" asp-route-id="@Model.Article.DocumentId" asp-route-comment="@comment">
+                            <button type="submit" class="remove-comment" data-comment="@comment">&#x2716;</button>
+                        </form>
+                    </div>
+                }
+
+            }
+            else
+            {
+                <p>No comments yet.</p>
+            }
+        </div>
+
+        <hr>
+
+        <h3>Add a Comment</h3>
+        <form method="post" asp-page-handler="OnPostAsync" asp-route-id="@Model.Article.DocumentId">
+            <div class="form-group">
+                <textarea class="form-control" rows="4" name="CommentText"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
 
         <div class="article-actions">
             <div class="button-container">
@@ -53,3 +85,33 @@
         <p>Article not found.</p>
     }
 </div>
+
+@section Scripts {
+    <script>
+        var removeButtons = document.getElementsByClassName('remove-comment');
+        Array.from(removeButtons).forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                var comment = this.getAttribute('data-comment');
+                var commentContainer = this.parentNode;
+
+                // Perform an AJAX request to remove the comment
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/News/DeleteComment', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        // Comment deleted successfully
+                        commentContainer.remove();
+                    }
+                };
+
+                var articleId = '@Model.Article?.DocumentId'; // Add null check here
+                if (articleId) {
+                    var data = JSON.stringify({ articleId: articleId, comment: comment });
+                    xhr.send(data);
+                }
+            });
+        });
+    </script>
+}

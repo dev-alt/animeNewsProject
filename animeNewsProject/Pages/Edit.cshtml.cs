@@ -25,11 +25,6 @@ namespace animeNewsProject.Pages
         {
             UpdatedArticle = await _articleRepository.GetArticleByIdAsync(id);
 
-            if (UpdatedArticle == null)
-            {
-                return NotFound();
-            }
-
             return Page();
         }
 
@@ -39,6 +34,19 @@ namespace animeNewsProject.Pages
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            if (UpdatedArticle.DocumentId != null)
+            {
+                var existingArticle = await _articleRepository.GetArticleByIdAsync(UpdatedArticle.DocumentId);
+
+                if (existingArticle == null)
+                {
+                    return NotFound();
+                }
+
+                // Assign the existing comments to the updated article
+                UpdatedArticle.Comments = existingArticle.Comments;
             }
 
             await _articleRepository.UpdateArticleAsync(UpdatedArticle);

@@ -4,128 +4,122 @@
     ViewData["Title"] = "Home page";
 }
 
-<p>Total Articles: @Model.TotalArticleCount</p>
-<p>Total Articles Shown on this page: @(Model.SearchResults?.Count ?? 0)</p>
+<style>
+    
+    .content-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    outline: none;
+    }
+    .section{
+        margin: 96px;}
+    .section-header {
+        margin: 24px;
+    
+    }
+    .card-set {
+        --min-row-height: 320px;
+        --stacked-col-max-height: 198px;
+        display: grid;
+        grid-gap: 8px;
+        gap: 8px;
+        grid-template-columns: repeat(6,1fr);
+        grid-auto-flow: row;
+        grid-auto-rows: minmax(var(--min-row-height),auto);
+    }
+    .article-card{
+        grid-column: span 2;
+    }
 
+    .article-container {
+        flex-direction: column-reverse;
+    }
 
-<div class="container py-5">
-    <!-- Search form -->
-    <form method="get" action="@Request.Path">
-        <div class="form-group">
-            <input type="text" class="form-control" name="search" placeholder="Search articles">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+    .article-contents
+    {
+        display: grid;
+        position: relative;
+        align-self: start;
+        margin: 24px;
+        grid-gap: 8px;
+        gap: 8px;
+    }
+    .card-image-container{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    height: 200px;
+    border-radius: 24px;
+    background-color: var(--mio-theme-color-secondary-container);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    overflow: hidden;
+    z-index: 1
+        }
+        .section-2 {
+        margin-top: 0px;    
+        }
+</style>
+
+<div class="content-container">
+    <div class="section">
+        <div class="section-header">
+            <h2>Featured Articles</h2>
         </div>
-    </form>
-
-    <p></p>
-
-    <div class="article-container">
-        <!-- Top articles of the Week -->
-        <h2 class="mb-4">Top articles of the Week</h2>
-        <div class="card-group">
-            <div class="card-group custom-card-group">
-                @foreach (var article in Model.SearchResults?.OrderByDescending(a => a.Views).Take(6) ?? new List<AnimeArticle>())
-                {
-                    <div class="card">
-                        @if (!string.IsNullOrEmpty(article.Image))
-                        {
-                            <img src="@article.Image" alt="Article Image" class="card-image">
-                        }
-                        else
-                        {
-                            <img src="/images/default.png" alt="Placeholder Image" class="card-image">
-                        }
-                        <div class="card-content">
-                            <a href="/news?id=@article.DocumentId" class="card-link">
-                                <h3 class="card-title">@article.Title</h3>
-                            </a>
-                            <p class="card-text">
-                                @if (article.Text != null)
-                                {
-                                    @TruncateText(article.Text, 100)
-                                }
-                            </p>
-                            <a href="/news?id=@article.DocumentId" class="card-link">Read More</a>
+        <div class="card-set">
+            @foreach (var article in Model.SearchResults?.OrderByDescending(a => a.Views).Take(3) ?? new List<AnimeArticle>())
+            {
+                <div class="article-card">
+                    <a class="article-container" href="/news?id=@article.DocumentId">
+                        <div class="article-contents">
+                            <span class="title">@article.Title</span>
+                            <div class="card-image-container" style="background-image: url('@(string.IsNullOrEmpty(article.Image) ? "/images/default.png" : article.Image)')">
+                            </div>
+                            <span class="subtitle"> @if (article.Text != null)
+                                                    {
+                                                        @TruncateText(article.Text, 100)
+                                                    }</span>
                         </div>
-                    </div>
-                }
-            </div>
-        </div>
-
-        <!-- Show all articles button -->
-        <div class="show-all-articles">
-            <a href="/articles" class="btn btn-primary">Show All Articles</a>
-        </div>
-
-        <!-- Show latest articles -->
-    <h2 class="mb-4">Latest articles released</h2>
-    <div class="card-group custom-card-group">
-        @foreach (var article in Model.SearchResults?.OrderByDescending(a => a.DatePublished)?.Take(3) ?? new List<AnimeArticle>())
-        {
-            <div class="card">
-                @if (!string.IsNullOrEmpty(article.Image))
-                {
-                    <img src="@article.Image" alt="Article Image" class="card-image">
-                }
-                else
-                {
-                    <img src="/images/default.png" alt="Placeholder Image" class="card-image">
-                }
-                <div class="card-content">
-                    <a href="/news?id=@article.DocumentId" class="card-link">
-                        <h3 class="card-title">@article.Title</h3>
                     </a>
-                    <p class="card-text">
-                        @if (article.Text != null)
-                        {
-                            @TruncateText(article.Text, 100)
-                        }
-                    </p>
-                    <a href="/news?id=@article.DocumentId" class="card-link">Read More</a>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 
-    <!-- Pagination -->
-    <div class="pagination">
-        <!-- First page -->
-        @if (Model.TotalPages > 1)
-        {
-            <a href="?CurrentPage=1" class="@(Model.CurrentPage == 1 ? "active" : "")">First</a>
-
-            <!-- Previous page -->
-            @if (Model.CurrentPage > 1)
+    <div class="section section-2">
+        <div class="section-header">
+            <h2>Latest Articles</h2>
+        </div>
+        <div class="card-set">
+            @foreach (var article in Model.SearchResults?.OrderByDescending(a => a.DatePublished)?.Take(6) ?? new List<AnimeArticle>())
             {
-                <a href="?CurrentPage=@(Model.CurrentPage - 1)">Previous</a>
+                <div class="article-card">
+                    <a class="article-container" href="/news?id=@article.DocumentId">
+                        <div class="article-contents">
+                            <span class="title">@article.Title</span>
+                            <div class="card-image-container" style="background-image: url('@(string.IsNullOrEmpty(article.Image) ? "/images/default.png" : article.Image)')">
+                            </div>
+                            <span class="subtitle"> @if (article.Text != null)
+                                                    {
+                                                        @TruncateText(article.Text, 100)
+                                                    }
+                            </span>
+                        </div>
+                    </a>
+                </div>
             }
-
-            <!-- Page numbers -->
-            @for (int i = 1; i <= Model.TotalPages; i++)
-            {
-                if (Math.Abs(Model.CurrentPage - i) <= 2 || i == 1 || i == Model.TotalPages)
-                {
-                    <a href="?CurrentPage=@i" class="@(Model.CurrentPage == i ? "active" : "")" style="margin: 0 5px;">@i</a>
-                }
-                else if (Math.Abs(Model.CurrentPage - i) == 3)
-                {
-                    <span class="dots">...</span>
-                }
-            }
-
-            <!-- Next page -->
-            @if (Model.CurrentPage < Model.TotalPages)
-            {
-                <a href="?CurrentPage=@(Model.CurrentPage + 1)">Next</a>
-            }
-            <!-- Last page -->
-            <a href="?CurrentPage=@Model.TotalPages" class="@(Model.CurrentPage == Model.TotalPages ? "active" : "")" style="margin: 0 5px;">Last</a>
-        }
+        </div>
     </div>
 </div>
-</div>
+
 @functions {
-    public string TruncateText(string? text, int maxLength)
+
+    private string TruncateText(string? text, int maxLength)
     {
         if (text != null && text.Length > maxLength)
         {

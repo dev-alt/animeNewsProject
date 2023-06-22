@@ -328,3 +328,81 @@ card-image-container .card-image {
 .layout-container .show-all-articles a:hover {
     color: #79a2ee;
 }
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.carousel-item {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(0.7);
+    transition: transform 0.3s;
+}
+
+    .carousel-item.active {
+        display: block;
+        transform: scale(1);
+        z-index: 1;
+    }
+
+    .carousel-item:not(.active) {
+        filter: brightness(70%);
+        z-index: 0;
+    }
+
+    .carousel-item.left,
+    .carousel-item.right {
+        transform: scale(0.7) translateX(15%);
+    }
+
+        .carousel-item.left.active,
+        .carousel-item.right.active {
+            transform: scale(1) translateX(0);
+            z-index: 1;
+        }
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 100%;
+}
+
+.carousel-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carousel-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.carousel-link {
+    color: white;
+    text-decoration: none;
+}
+.c-card .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: fit-content;
+}

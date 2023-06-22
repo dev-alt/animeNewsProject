@@ -1,10 +1,6 @@
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace animeNewsProject.Pages
 {
@@ -15,10 +11,8 @@ namespace animeNewsProject.Pages
         private readonly MongoDbService _mongoDbService;
         private readonly BlobStorageService _blobStorageService;
 
-
         [BindProperty]
         public Entry Article { get; set; }
-
 
         public AddArticleModel(MongoDbService mongoDbService, BlobStorageService blobStorageService)
         {
@@ -27,13 +21,10 @@ namespace animeNewsProject.Pages
             Article = new Entry(); // Initialize the Article property
         }
 
-
-
         public async Task<IActionResult> OnPost(IFormFile imageFile)
         {
             try
             {
-                
                 if (imageFile != null && imageFile.Length > 0)// Check if an image file is provided
                 {
                     var maxFileSize = 2 * 1024 * 1024; // 2 MB  Set the maximum allowed file size (in bytes)
@@ -66,8 +57,7 @@ namespace animeNewsProject.Pages
                 if (Article.Text != null)
                 {
                     Article.Summary =
-                        Article.Text.Substring(0,
-                            Math.Min(Article.Text.Length, 100)); // Set a summary based on the article text
+                        Article.Text[..Math.Min(Article.Text.Length, 100)]; // Set a summary based on the article text
                     Article.Tags = ExtractTagsFromText(Article.Text); // Extract tags from the article text
                 }
 
@@ -82,19 +72,17 @@ namespace animeNewsProject.Pages
             }
             catch
             {
-               
+
                 ModelState.AddModelError(string.Empty, "Error occurred while adding the article."); // Handle any exception that occurs during the database operation
                 return Page(); // Return the page with the error message
             }
-
         }
-        // Extract tags from the article text
-        private string[] ExtractTagsFromText(string text)
+
+        private static string[] ExtractTagsFromText(string text) // Extract tags from the article text
         {
             // Define a HashSet to store the extracted tags (to avoid duplicates)
-            HashSet<string> tags = new HashSet<string>();
+            HashSet<string> tags = new();
 
-            // List of predefined tags
             string[] predefinedTags = {
                 "Anime", "Manga", "Adaptation", "Season", "Episode", "Film", "Series", "Premiere", "Release",
                 "Streaming", "Crunchyroll", "Funimation", "Netflix", "Character", "Studio", "Genre", "Fantasy",
@@ -103,7 +91,7 @@ namespace animeNewsProject.Pages
                 "Otaku", "Cosplay", "Voice Acting", "Fanbase", "Merchandise", "Convention", "Opening Theme",
                 "Ending Theme", "OST (Original Soundtrack)", "VA (Voice Actor)", "Dubbed", "Subbed", "Simulcast",
                 "Blu-ray", "DVD", "Collectibles"
-            };
+            }; // List of predefined tags
 
             // Split the text into words using whitespace and punctuation as delimiters
             string[] words = text.Split(new[] { ' ', ',', '.', ';', ':', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries);
